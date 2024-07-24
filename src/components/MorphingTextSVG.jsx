@@ -126,7 +126,6 @@ fn main() {
 }`;
 
 const asciiTitle = [
-
     `  __  __           _                           __   _   _           
  |  \\/  |         | |                         / _| | | | |          
  | \\  / |_   _ ___| |_ ___ _ __ _   _    ___ | |_  | |_| |__   ___  
@@ -149,6 +148,7 @@ const MorphingTextSVG = () => {
     const [displayText, setDisplayText] = useState([]);
     const [titleRevealProgress, setTitleRevealProgress] = useState(0);
     const [delayPassed, setDelayPassed] = useState(false);
+    const [fontSize, setFontSize] = useState(16);
     const svgRef = useRef(null);
     const morphProgressRef = useRef(0);
     const animationPhaseRef = useRef(0);
@@ -159,9 +159,13 @@ const MorphingTextSVG = () => {
             if (svgRef.current) {
                 const svgWidth = svgRef.current.clientWidth;
                 const svgHeight = svgRef.current.clientHeight;
-                const fontSize = 16;
-                const cols = Math.floor(svgWidth / (fontSize * 0.6));
-                const rows = Math.floor(svgHeight / fontSize);
+
+                // Adjust font size based on screen size
+                const newFontSize = Math.max(8, Math.min(16, svgWidth / 80));
+                setFontSize(newFontSize);
+
+                const cols = Math.floor(svgWidth / (newFontSize * 0.6));
+                const rows = Math.floor(svgHeight / newFontSize);
 
                 const initialLines = initialText.split('\n');
                 const paddedInitialText = initialLines.map(line => line.padEnd(cols, ' '));
@@ -281,7 +285,7 @@ const MorphingTextSVG = () => {
                 background: '#061434',
                 width: '100%',
                 height: '100%',
-                position: 'absolute',
+                position: 'fixed',
                 top: 0,
                 left: 0
             }}
@@ -291,10 +295,10 @@ const MorphingTextSVG = () => {
                 <text
                     key={index}
                     x="10"
-                    y={index * 16 + 20}
+                    y={index * fontSize + fontSize / 2}
                     fill="rgba(102, 120, 172, 0.8)"
                     style={{
-                        fontSize: '16px',
+                        fontSize: `${fontSize}px`,
                         fontFamily: 'monospace',
                         dominantBaseline: 'hanging',
                         whiteSpace: 'pre',
@@ -309,11 +313,11 @@ const MorphingTextSVG = () => {
                     <text
                         key={index}
                         x="0"
-                        y={(index - asciiTitle.length / 2) * 16}
+                        y={(index - asciiTitle.length / 2) * fontSize}
                         fill="#FF9900"
                         textAnchor="middle"
                         style={{
-                            fontSize: '16px',
+                            fontSize: `${fontSize}px`,
                             fontFamily: 'monospace',
                             dominantBaseline: 'middle',
                             whiteSpace: 'pre'
