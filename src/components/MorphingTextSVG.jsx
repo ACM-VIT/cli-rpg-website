@@ -314,7 +314,7 @@ const MorphingTextSVG = () => {
                         key={index}
                         x="0"
                         y={(index - asciiTitle.length / 2) * fontSize}
-                        fill="#FF9900"
+                        fill="#00FF00"
                         textAnchor="middle"
                         style={{
                             fontSize: `${fontSize}px`,
@@ -327,6 +327,21 @@ const MorphingTextSVG = () => {
                     </text>
                 ))}
             </g>
+            <text
+                x="50%"
+                y="45%"
+                fill="#FF0000"
+                textAnchor="middle"
+                style={{
+                    fontSize: `${fontSize + 5}px`,
+                    fontFamily: 'monospace',
+                    dominantBaseline: 'middle',
+                    whiteSpace: 'pre'
+                }}
+            >
+                Made with {'<3'} by ACM-VIT
+
+            </text>
         </svg>
     );
 };
