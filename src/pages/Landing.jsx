@@ -18,8 +18,8 @@ const Landing = () => {
                             <Button
                                 leftIcon={<DownloadIcon />}
                                 className="landing-button"
-                                bg="rgba(255, 153, 0, 0.1)"
-                                color="orange.500"
+                                bg="rgba(255, 153, 0, 0.3)"
+                                color="white"
                                 _hover={{ bg: 'rgba(255, 153, 0, 0.2)' }}
                                 _active={{ bg: 'rgba(255, 153, 0, 0.3)' }}
                             >
@@ -28,8 +28,8 @@ const Landing = () => {
                             <Button
                                 leftIcon={<SettingsIcon />}
                                 className="landing-button"
-                                bg="rgba(153, 50, 204, 0.1)"
-                                color="purple.500"
+                                bg="rgba(153, 50, 204, 0.3)"
+                                color="white"
                                 _hover={{ bg: 'rgba(153, 50, 204, 0.2)' }}
                                 _active={{ bg: 'rgba(153, 50, 204, 0.3)' }}
                             >
@@ -38,8 +38,8 @@ const Landing = () => {
                             <Button
                                 leftIcon={<InfoIcon />}
                                 className="landing-button"
-                                bg="rgba(0, 128, 128, 0.1)"
-                                color="teal.500"
+                                bg="rgba(0, 128, 128, 0.3)"
+                                color="white"
                                 _hover={{ bg: 'rgba(0, 128, 128, 0.2)' }}
                                 _active={{ bg: 'rgba(0, 128, 128, 0.3)' }}
                             >
