@@ -1,0 +1,12 @@
+#bannerSVG {
+    animation: backgroundChange 30s infinite;
+  }
+  
+  @keyframes backgroundChange {
+    0% { background-color: #061434; }
+    25% { background-color: #0a1b4d; }
+    50% { background-color: #0d2257; }
+    75% { background-color: #0a1b4d; }
+    100% { background-color: #061434; }
+  }
+  
