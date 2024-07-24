@@ -9,9 +9,9 @@ const Landing = () => {
                 <MorphingTextSVG />
             </div>
             <div className="button-container">
-                <button className="landing-button">Button 1</button>
-                <button className="landing-button">Button 2</button>
-                <button className="landing-button">Button 3</button>
+                <button className="landing-button">Download</button>
+                <button className="landing-button">Setup</button>
+                <button className="landing-button">About</button>
             </div>
         </div>
     );
