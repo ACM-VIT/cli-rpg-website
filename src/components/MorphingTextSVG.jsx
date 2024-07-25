@@ -59,11 +59,11 @@ fn draw_map<W: Write>(stdout: &mut W, pos: &Position, secret_room_visible: bool,
     execute!(stdout, terminal::Clear(ClearType::All)).unwrap();
     for (y, line) in HOUSE_MAP.iter().enumerate() {
         for (x, ch) in line.chars().enumerate() {
-            if pos.x == x && pos.y == y {
+            if (pos.x == x && pos.y == y) {
                 print!("Q");
-            } else if (y >= 12 && y <= 16 && x >= 5 && x <= 16) && !secret_room_visible {
+            } else if (y >= 12 && y <= 16 && x >= 5 && x <= 16 && !secret_room_visible) {
                 print!(" ");
-            } else if (y == 12 && x == 21) && !box_visible {
+            } else if (y == 12 && x == 21 && !box_visible) {
                 print!(" ");
             } else {
                 print!("{}", ch);
@@ -80,7 +80,7 @@ fn move_position(pos: &mut Position, dx: isize, dy: isize) {
 
     if new_y < HOUSE_MAP.len() && new_x < HOUSE_MAP[new_y].len() {
         let next_char = HOUSE_MAP[new_y].chars().nth(new_x).unwrap();
-        if (next_char == ' ' || next_char == '_' || next_char == '.' || next_char==':'){
+        if (next_char == ' ' || next_char == '_' || next_char == '.' || next_char == ':'){
             pos.x = new_x;
             pos.y = new_y;
         }
@@ -109,11 +109,11 @@ fn main() {
                     _ => {}
                 }
 
-                if pos.y >= 12 && pos.y <= 16 && pos.x >= 5 && pos.x <= 16 {
+                if (pos.y >= 12 && pos.y <= 16 && pos.x >= 5 && pos.x <= 16) {
                     secret_room_visible = true;
                 }
 
-                if pos.y == 12 && pos.x == 21 {
+                if (pos.y == 12 && pos.x == 21) {
                     box_visible = true;
                 }
 
@@ -196,19 +196,17 @@ const MorphingTextSVG = () => {
     }, []);
 
     useEffect(() => {
-        // Add a 2-second delay before starting the animation
         const delayTimer = setTimeout(() => {
             setDelayPassed(true);
         }, 2000);
 
         const intervalId = setInterval(() => {
-            if (!delayPassed) return; // Don't start morphing until the delay has passed
+            if (!delayPassed) return;
 
             setDisplayText(prevText => {
                 return prevText.map((line, y) =>
                     line.split('').map((char, x) => {
                         if (animationPhaseRef.current === 0) {
-                            // Initial morphing phase
                             if (Math.random() < 0.01 + morphProgressRef.current / 1000) {
                                 return String.fromCharCode(33 + Math.floor(Math.random() * 94));
                             }
@@ -221,7 +219,6 @@ const MorphingTextSVG = () => {
                                 return prevText[newY][newX];
                             }
                         } else {
-                            // Circular movement phase
                             for (let circle of circlesRef.current) {
                                 const dx = x - circle.x;
                                 const dy = y - circle.y;
@@ -258,14 +255,13 @@ const MorphingTextSVG = () => {
 
     useEffect(() => {
         const titleIntervalId = setInterval(() => {
-            // Gradually reveal the title
             setTitleRevealProgress(prev => {
                 if (prev < asciiTitle.join('').length) {
-                    return prev + 4;
+                    return prev + 16;
                 }
                 return prev;
             });
-        }, 50);
+        }, 25);
 
         return () => clearInterval(titleIntervalId);
     }, []);
@@ -284,7 +280,7 @@ const MorphingTextSVG = () => {
             style={{
                 background: '#061434',
                 width: '100%',
-                height: '90%',
+                height: '100%',
                 position: 'fixed',
                 top: 0,
                 left: 0
@@ -295,7 +291,7 @@ const MorphingTextSVG = () => {
                 <text
                     key={index}
                     x="10"
-                    y={index * fontSize + fontSize / 2}
+                    y={index * fontSize + fontSize}
                     fill="rgba(102, 120, 172, 0.8)"
                     style={{
                         fontSize: `${fontSize}px`,
@@ -329,7 +325,7 @@ const MorphingTextSVG = () => {
             </g>
             <text
                 x="50%"
-                y="45%"
+                y="95%"
                 fill="#FF0000"
                 textAnchor="middle"
                 style={{
@@ -340,7 +336,6 @@ const MorphingTextSVG = () => {
                 }}
             >
                 Made with {'<3'} by ACM-VIT
-
             </text>
         </svg>
     );

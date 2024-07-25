@@ -6,8 +6,11 @@ import "./App.css";
 const App = () => {
   return (
     <div className="parent">
-      <Landing />
-    </div>
+      <div className>
+        <Landing />
+      </div>
+    </div >
+
   );
 }
 
