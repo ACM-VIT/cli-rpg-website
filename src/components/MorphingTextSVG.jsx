@@ -283,7 +283,7 @@ const MorphingTextSVG = () => {
             version="1.1"
             style={{
                 background: '#061434',
-                width: '100%',
+                width: '110%',
                 height: '100%',
                 position: 'fixed',
                 top: 0,
