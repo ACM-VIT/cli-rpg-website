@@ -324,7 +324,7 @@ const MorphingTextSVG = () => {
                 ))}
             </g>
             <text
-                x="50%"
+                x="45%"
                 y="95%"
                 fill="#FF0000"
                 textAnchor="middle"
