@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ChakraProvider, Button, HStack, Box, IconButton, Flex } from '@chakra-ui/react';
-import { DownloadIcon, SettingsIcon, InfoIcon } from '@chakra-ui/icons';
+import { ChakraProvider, Button, HStack, Box, IconButton, Flex, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
+import { DownloadIcon, SettingsIcon, InfoIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import MorphingTextSVG from '../components/MorphingTextSVG';
 import theme from '../../theme';
 import './Landing.css';
@@ -23,59 +23,98 @@ const Landing = () => {
                 </Box>
                 <Flex className="button-section">
                     <HStack spacing={2} className="left-buttons">
-                        <Button
-                            leftIcon={<DownloadIcon />}
-                            className="landing-button"
-                            bg="rgba(255, 153, 0, 0.3)"
-                            color="white"
-                            _hover={{ bg: 'rgba(255, 153, 0, 0.2)' }}
-                            _active={{ bg: 'rgba(255, 153, 0, 0.3)' }}
-                            aria-label="Download"
-                            display={['none', 'flex']}
-                        >
-                            Download
-                        </Button>
-                        <IconButton
-                            icon={<DownloadIcon />}
-                            className="landing-button"
-                            bg="rgba(255, 153, 0, 0.3)"
-                            color="white"
-                            _hover={{ bg: 'rgba(255, 153, 0, 0.2)' }}
-                            _active={{ bg: 'rgba(255, 153, 0, 0.3)' }}
-                            aria-label="Download"
-                            display={['flex', 'none']}
-                        />
-                        <Button
-                            leftIcon={<SettingsIcon />}
-                            className="landing-button"
-                            bg="rgba(153, 50, 204, 0.3)"
-                            color="white"
-                            _hover={{ bg: 'rgba(153, 50, 204, 0.2)' }}
-                            _active={{ bg: 'rgba(153, 50, 204, 0.3)' }}
-                            aria-label="Setup"
-                            display={['none', 'flex']}
-                        >
-                            Setup
-                        </Button>
-                        <IconButton
-                            icon={<SettingsIcon />}
-                            className="landing-button"
-                            bg="rgba(153, 50, 204, 0.3)"
-                            color="white"
-                            _hover={{ bg: 'rgba(153, 50, 204, 0.2)' }}
-                            _active={{ bg: 'rgba(153, 50, 204, 0.3)' }}
-                            aria-label="Setup"
-                            display={['flex', 'none']}
-                        />
+                        <Menu>
+                            <MenuButton
+                                as={Button}
+                                leftIcon={<DownloadIcon />}
+                                rightIcon={<ChevronDownIcon />}
+                                className="landing-button"
+                                bg="orange.500"
+                                color="white"
+                                borderRadius="full"
+                                _hover={{ bg: 'orange.400' }}
+                                _active={{ bg: 'orange.600' }}
+                                aria-label="Download"
+                                display={['none', 'flex']}
+                            >
+                                Download
+                            </MenuButton>
+                            <MenuList zIndex="10" bg="gray.800" color="white" borderRadius="md">
+                                <MenuItem _hover={{ bg: 'gray.700' }}>macOS</MenuItem>
+                                <MenuItem _hover={{ bg: 'gray.700' }}>Linux</MenuItem>
+                                <MenuItem _hover={{ bg: 'gray.700' }}>Windows</MenuItem>
+                            </MenuList>
+                        </Menu>
+                        <Menu>
+                            <MenuButton
+                                as={IconButton}
+                                icon={<DownloadIcon />}
+                                className="landing-button"
+                                bg="orange.500"
+                                color="white"
+                                borderRadius="full"
+                                _hover={{ bg: 'orange.400' }}
+                                _active={{ bg: 'orange.600' }}
+                                aria-label="Download"
+                                display={['flex', 'none']}
+                            />
+                            <MenuList zIndex="10" bg="gray.800" color="white" borderRadius="md">
+                                <MenuItem _hover={{ bg: 'gray.700' }}>macOS</MenuItem>
+                                <MenuItem _hover={{ bg: 'gray.700' }}>Linux</MenuItem>
+                                <MenuItem _hover={{ bg: 'gray.700' }}>Windows</MenuItem>
+                            </MenuList>
+                        </Menu>
+                        <Menu>
+                            <MenuButton
+                                as={Button}
+                                leftIcon={<SettingsIcon />}
+                                rightIcon={<ChevronDownIcon />}
+                                className="landing-button"
+                                bg="purple.500"
+                                color="white"
+                                borderRadius="full"
+                                _hover={{ bg: 'purple.400' }}
+                                _active={{ bg: 'purple.600' }}
+                                aria-label="Setup"
+                                display={['none', 'flex']}
+                            >
+                                Setup
+                            </MenuButton>
+                            <MenuList zIndex="10" bg="gray.800" color="white" borderRadius="md">
+                                <MenuItem _hover={{ bg: 'gray.700' }}>macOS</MenuItem>
+                                <MenuItem _hover={{ bg: 'gray.700' }}>Linux</MenuItem>
+                                <MenuItem _hover={{ bg: 'gray.700' }}>Windows</MenuItem>
+                            </MenuList>
+                        </Menu>
+                        <Menu>
+                            <MenuButton
+                                as={IconButton}
+                                icon={<SettingsIcon />}
+                                className="landing-button"
+                                bg="purple.500"
+                                color="white"
+                                borderRadius="full"
+                                _hover={{ bg: 'purple.400' }}
+                                _active={{ bg: 'purple.600' }}
+                                aria-label="Setup"
+                                display={['flex', 'none']}
+                            />
+                            <MenuList zIndex="10" bg="gray.800" color="white" borderRadius="md">
+                                <MenuItem _hover={{ bg: 'gray.700' }}>macOS</MenuItem>
+                                <MenuItem _hover={{ bg: 'gray.700' }}>Linux</MenuItem>
+                                <MenuItem _hover={{ bg: 'gray.700' }}>Windows</MenuItem>
+                            </MenuList>
+                        </Menu>
                     </HStack>
                     <Box className="right-button">
                         <Button
                             leftIcon={<InfoIcon />}
                             className="landing-button"
-                            bg="rgba(0, 128, 128, 0.3)"
+                            bg="teal.500"
                             color="white"
-                            _hover={{ bg: 'rgba(0, 128, 128, 0.2)' }}
-                            _active={{ bg: 'rgba(0, 128, 128, 0.3)' }}
+                            borderRadius="full"
+                            _hover={{ bg: 'teal.400' }}
+                            _active={{ bg: 'teal.600' }}
                             aria-label="About"
                             display={['none', 'flex']}
                         >
@@ -84,10 +123,11 @@ const Landing = () => {
                         <IconButton
                             icon={<InfoIcon />}
                             className="landing-button"
-                            bg="rgba(0, 128, 128, 0.3)"
+                            bg="teal.500"
                             color="white"
-                            _hover={{ bg: 'rgba(0, 128, 128, 0.2)' }}
-                            _active={{ bg: 'rgba(0, 128, 128, 0.3)' }}
+                            borderRadius="full"
+                            _hover={{ bg: 'teal.400' }}
+                            _active={{ bg: 'teal.600' }}
                             aria-label="About"
                             display={['flex', 'none']}
                         />
