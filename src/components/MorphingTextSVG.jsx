@@ -279,7 +279,7 @@ const MorphingTextSVG = () => {
             version="1.1"
             style={{
                 background: '#061434',
-                width: '110%',
+                width: '100%',
                 height: '100%',
                 position: 'fixed',
                 top: 0,
@@ -324,8 +324,8 @@ const MorphingTextSVG = () => {
                 ))}
             </g>
             <text
-                x="40%"
-                y="95%"
+                x="50%"
+                y="30%"
                 fill="#FF0000"
                 textAnchor="middle"
                 style={{
