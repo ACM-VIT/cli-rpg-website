@@ -11,14 +11,15 @@ const Landing = () => {
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsAnimated(true);
-        }, 2000); // Adjust the timing as needed
+        }, 6000); // Adjust the timing as needed
         return () => clearTimeout(timer);
     }, []);
 
     return (
         <ChakraProvider theme={theme}>
-            <div className={`landing-container ${isAnimated ? 'animated' : ''}`}>
-                <div className={`svg-container ${isAnimated ? 'svg-animated' : ''}`}>
+            <div>
+
+                <div>
                     <MorphingTextSVG isAnimated={isAnimated} />
                 </div>
                 <div className="button-section">
