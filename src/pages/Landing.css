@@ -17,54 +17,36 @@
   position: absolute;
   bottom: 0;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   background-color: rgba(0, 0, 0, 0.7);
-  padding: 10px 0;
+  padding: 10px 20px;
 }
 
-.button-container {
-  width: 100%;
-  max-width: 600px;
-  padding: 10px;
+.left-buttons {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
 }
 
-.button-wrapper {
-  position: relative;
-  flex: 1;
+.right-button {
+  display: flex;
 }
 
 .landing-button {
-  width: 100%;
+  margin-right: 10px;
 }
 
-.full-button {
-  display: flex;
-}
-
-.icon-button {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+.right-button .landing-button {
+  margin-right: 0;
 }
 
 @media (max-width: 480px) {
-  .full-button {
-    display: none;
+  .landing-button {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
   }
 
-  .icon-button {
-    display: flex;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-  }
-
-  .button-container {
-    padding: 5px;
+  .button-section {
+    padding: 10px;
   }
 }

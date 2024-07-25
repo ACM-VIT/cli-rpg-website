@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChakraProvider, Button, HStack, Box, IconButton } from '@chakra-ui/react';
+import { ChakraProvider, Button, HStack, Box, IconButton, Flex } from '@chakra-ui/react';
 import { DownloadIcon, SettingsIcon, InfoIcon } from '@chakra-ui/icons';
 import MorphingTextSVG from '../components/MorphingTextSVG';
 import theme from '../../theme';
@@ -21,8 +21,8 @@ const Landing = () => {
                 <Box className="svg-container">
                     <MorphingTextSVG isAnimated={isAnimated} />
                 </Box>
-                <Box className="button-section">
-                    <HStack spacing={[2, 4]} className="button-container">
+                <Flex className="button-section">
+                    <HStack spacing={2} className="left-buttons">
                         <Button
                             leftIcon={<DownloadIcon />}
                             className="landing-button"
@@ -67,6 +67,8 @@ const Landing = () => {
                             aria-label="Setup"
                             display={['flex', 'none']}
                         />
+                    </HStack>
+                    <Box className="right-button">
                         <Button
                             leftIcon={<InfoIcon />}
                             className="landing-button"
@@ -89,8 +91,8 @@ const Landing = () => {
                             aria-label="About"
                             display={['flex', 'none']}
                         />
-                    </HStack>
-                </Box>
+                    </Box>
+                </Flex>
             </Box>
         </ChakraProvider>
     );
