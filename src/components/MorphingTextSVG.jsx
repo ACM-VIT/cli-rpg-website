@@ -177,7 +177,7 @@ const MorphingTextSVG = () => {
                 setDisplayText(paddedInitialText);
 
                 // Initialize circles
-                const numCircles = 5;
+                const numCircles = 50;
                 circlesRef.current = Array(numCircles).fill().map(() => ({
                     x: Math.random() * cols,
                     y: Math.random() * rows,
@@ -198,7 +198,7 @@ const MorphingTextSVG = () => {
     useEffect(() => {
         const delayTimer = setTimeout(() => {
             setDelayPassed(true);
-        }, 4000);
+        }, 2000); // Start animation after 2 seconds
 
         const intervalId = setInterval(() => {
             if (!delayPassed) return;
