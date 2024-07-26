@@ -6,21 +6,15 @@ import theme from '../../theme';
 import './Landing.css';
 
 const Landing = () => {
-    const [isAnimated, setIsAnimated] = useState(false);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsAnimated(true);
-        }, 500);
-        return () => clearTimeout(timer);
-    }, []);
 
     return (
         <ChakraProvider theme={theme}>
             <Box className="landing-container">
                 <Box className="svg-container">
-                    <MorphingTextSVG isAnimated={isAnimated} />
-                    <MorphingTextSVG isAnimated={isAnimated} />
+                    <MorphingTextSVG />
+
+
 
                 </Box>
                 <Flex className="button-section">
