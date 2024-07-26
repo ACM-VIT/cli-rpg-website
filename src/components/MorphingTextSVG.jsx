@@ -156,6 +156,7 @@ const MorphingTextSVG = () => {
     const circlesRef = useRef([]);
 
     useEffect(() => {
+
         const updateTextSize = () => {
             const svgWidth = window.innerWidth;
             const svgHeight = window.innerHeight;
@@ -198,7 +199,7 @@ const MorphingTextSVG = () => {
     useEffect(() => {
         const delayTimer = setTimeout(() => {
             setDelayPassed(true);
-        }, 2000); // Start animation after 2 seconds
+        }, 1000); // Start animation after 2 seconds
 
         const intervalId = setInterval(() => {
             if (!delayPassed) return;
@@ -261,7 +262,7 @@ const MorphingTextSVG = () => {
                 }
                 return prev;
             });
-        }, 25);
+        }, 15);
 
         return () => clearInterval(titleIntervalId);
     }, []);
@@ -283,7 +284,7 @@ const MorphingTextSVG = () => {
                 background: '#061434',
                 position: 'fixed',
                 top: 0,
-                left: 0
+                left: 100
             }}
             preserveAspectRatio="none"
         >
@@ -325,7 +326,7 @@ const MorphingTextSVG = () => {
             </g>
             <text
                 x="50%"
-                y="30%"
+                y="40%"
                 fill="#FF0000"
                 textAnchor="middle"
                 style={{
