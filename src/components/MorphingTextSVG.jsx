@@ -12,7 +12,7 @@ use std::io::{self, Write};
 const HOUSE_MAP: [&str; 32] = [
     "        /////==============/////",
     "       /                        \\",
-    "  ====/                          \\===///====///=",
+    "  ====/                          \\===///====///="                                                                                                                    bfakhjsbfakbk,
     "  ||--|                           :_||  Garden //",
     "  ||c :       Master              |__|   Tub   |",
     "  ||l :        Bedroom            :  \\________///",
