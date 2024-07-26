@@ -1,6 +1,6 @@
 #bannerSVG {
     animation: backgroundChange 30s infinite;
-    background-repeat: repeat-y;
+    background-repeat: repeat-x;
   }
   
   @keyframes backgroundChange {
