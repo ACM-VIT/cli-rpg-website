@@ -12,15 +12,6 @@
   justify-content: center;
 }
 
-.button-section {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 10px 20px;
-}
 
 .left-buttons {
   display: flex;
@@ -50,3 +41,16 @@
     padding: 10px;
   }
 }
+
+.button-section {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px 20px;
+  z-index: 1000;
+}
+
