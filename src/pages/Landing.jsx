@@ -59,7 +59,7 @@ const Landing = () => {
                                 display={['flex', 'none']}
                             />
                             <MenuList zIndex="10" bg="gray.800" color="white" borderRadius="md">
-                                <MenuItem _hover={{ bg: 'gray.700' }}>macYASH</MenuItem>
+                                <MenuItem _hover={{ bg: 'gray.700' }}>macOS</MenuItem>
                                 <MenuItem _hover={{ bg: 'gray.700' }}>Linux</MenuItem>
                                 <MenuItem _hover={{ bg: 'gray.700' }}>Windows</MenuItem>
                             </MenuList>
