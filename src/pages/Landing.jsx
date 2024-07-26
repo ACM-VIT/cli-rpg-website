@@ -20,6 +20,8 @@ const Landing = () => {
             <Box className="landing-container">
                 <Box className="svg-container">
                     <MorphingTextSVG isAnimated={isAnimated} />
+                    <MorphingTextSVG isAnimated={isAnimated} />
+
                 </Box>
                 <Flex className="button-section">
                     <HStack spacing={2} className="left-buttons">
