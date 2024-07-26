@@ -284,7 +284,7 @@ const MorphingTextSVG = () => {
                 background: '#061434',
                 position: 'fixed',
                 top: 0,
-                left: 100
+                left: 0
             }}
             preserveAspectRatio="none"
         >
