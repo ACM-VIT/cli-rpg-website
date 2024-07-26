@@ -12,8 +12,8 @@ use std::io::{self, Write};
 const HOUSE_MAP: [&str; 32] = [
     "        /////==============/////",
     "       /                        \\",
-    "  ====/                          \\===///====///="                                                                                                                     bfakhjsbfakbkbfakhjsbfakbkbfakhjsbfakbkbfakhjsbfakbkbfakhjsbfakbkbfakhjsbfakbkbfakhjsbfakbkbfakhjsbfakbk,
-    "  ||--|                           :_||  Garden //",                                                                                                                    fakhjsbfakbkbfakhjsbfakbkbfakhjsbfakbkbfakhjsbfakbkbfakhjsbfakbkbfakhjsbfakbkbfakhjsbfakbkbfakhjsbfakbk
+    "  ====/                          \\===///====///=",
+    "  ||--|                           :_||  Garden //",                                                                                                                    
     "  ||c :       Master              |__|   Tub   |",
     "  ||l :        Bedroom            :  \\________///",
     "  ||o :                           :__        |O|",
@@ -149,7 +149,7 @@ const MorphingTextSVG = () => {
     const [titleRevealProgress, setTitleRevealProgress] = useState(0);
     const [delayPassed, setDelayPassed] = useState(false);
     const [fontSize, setFontSize] = useState(16);
-    const [svgDimensions, setSvgDimensions] = useState({ width: 0, height: 0 });
+    const [svgDimensions, setSvgDimensions] = useState({ width: 100000, height: 0 });
     const svgRef = useRef(null);
     const morphProgressRef = useRef(0);
     const animationPhaseRef = useRef(0);
