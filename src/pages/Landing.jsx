@@ -13,9 +13,6 @@ const Landing = () => {
             <Box className="landing-container">
                 <Box className="svg-container">
                     <MorphingTextSVG />
-
-
-
                 </Box>
                 <Flex className="button-section">
                     <HStack spacing={2} className="left-buttons">
@@ -35,10 +32,10 @@ const Landing = () => {
                             >
                                 Download
                             </MenuButton>
-                            <MenuList zIndex="10" bg="gray.800" color="white" borderRadius="md">
-                                <MenuItem _hover={{ bg: 'gray.700' }}>macOS</MenuItem>
-                                <MenuItem _hover={{ bg: 'gray.700' }}>Linux</MenuItem>
-                                <MenuItem _hover={{ bg: 'gray.700' }}>Windows</MenuItem>
+                            <MenuList zIndex="10" bg="gray.800" color="gray.800" borderRadius="md">
+                                <MenuItem _hover={{ bg: 'white' }}>macOS</MenuItem>
+                                <MenuItem _hover={{ bg: 'white' }}>Linux</MenuItem>
+                                <MenuItem _hover={{ bg: 'white' }}>Windows</MenuItem>
                             </MenuList>
                         </Menu>
                         <Menu>
@@ -54,10 +51,10 @@ const Landing = () => {
                                 aria-label="Download"
                                 display={['flex', 'none']}
                             />
-                            <MenuList zIndex="10" bg="gray.800" color="white" borderRadius="md">
-                                <MenuItem _hover={{ bg: 'gray.700' }}>macOS</MenuItem>
-                                <MenuItem _hover={{ bg: 'gray.700' }}>Linux</MenuItem>
-                                <MenuItem _hover={{ bg: 'gray.700' }}>Windows</MenuItem>
+                            <MenuList zIndex="10" bg="gray.800" color="gray.800" borderRadius="md">
+                                <MenuItem _hover={{ bg: 'white' }}>macOS</MenuItem>
+                                <MenuItem _hover={{ bg: 'white' }}>Linux</MenuItem>
+                                <MenuItem _hover={{ bg: 'white' }}>Windows</MenuItem>
                             </MenuList>
                         </Menu>
                         <Menu>
@@ -76,10 +73,10 @@ const Landing = () => {
                             >
                                 Setup
                             </MenuButton>
-                            <MenuList zIndex="10" bg="gray.800" color="white" borderRadius="md">
-                                <MenuItem _hover={{ bg: 'gray.700' }}>macOS</MenuItem>
-                                <MenuItem _hover={{ bg: 'gray.700' }}>Linux</MenuItem>
-                                <MenuItem _hover={{ bg: 'gray.700' }}>Windows</MenuItem>
+                            <MenuList zIndex="10" bg="gray.800" color="gray.800" borderRadius="md">
+                                <MenuItem _hover={{ bg: 'white' }}>macOS</MenuItem>
+                                <MenuItem _hover={{ bg: 'white' }}>Linux</MenuItem>
+                                <MenuItem _hover={{ bg: 'white' }}>Windows</MenuItem>
                             </MenuList>
                         </Menu>
                         <Menu>
@@ -95,10 +92,10 @@ const Landing = () => {
                                 aria-label="Setup"
                                 display={['flex', 'none']}
                             />
-                            <MenuList zIndex="10" bg="gray.800" color="white" borderRadius="md">
-                                <MenuItem _hover={{ bg: 'gray.700' }}>macOS</MenuItem>
-                                <MenuItem _hover={{ bg: 'gray.700' }}>Linux</MenuItem>
-                                <MenuItem _hover={{ bg: 'gray.700' }}>Windows</MenuItem>
+                            <MenuList zIndex="10" bg="gray.800" color="gray.800" borderRadius="md">
+                                <MenuItem _hover={{ bg: 'white' }}>macOS</MenuItem>
+                                <MenuItem _hover={{ bg: 'white' }}>Linux</MenuItem>
+                                <MenuItem _hover={{ bg: 'white' }}>Windows</MenuItem>
                             </MenuList>
                         </Menu>
                     </HStack>
