@@ -149,6 +149,7 @@ const MorphingTextSVG = () => {
     const [titleRevealProgress, setTitleRevealProgress] = useState(0);
     const [delayPassed, setDelayPassed] = useState(false);
     const [fontSize, setFontSize] = useState(16);
+    const [svgDimensions, setSvgDimensions] = useState({ width: 0, height: 0 });
     const svgRef = useRef(null);
     const morphProgressRef = useRef(0);
     const animationPhaseRef = useRef(0);
@@ -156,35 +157,34 @@ const MorphingTextSVG = () => {
 
     useEffect(() => {
         const updateTextSize = () => {
-            if (svgRef.current) {
-                const svgWidth = svgRef.current.clientWidth;
-                const svgHeight = svgRef.current.clientHeight;
+            const svgWidth = window.innerWidth;
+            const svgHeight = window.innerHeight;
+            setSvgDimensions({ width: svgWidth, height: svgHeight });
 
-                // Adjust font size based on screen size
-                const newFontSize = Math.max(8, Math.min(16, svgWidth / 80));
-                setFontSize(newFontSize);
+            // Adjust font size based on screen size
+            const newFontSize = Math.max(8, Math.min(16, svgWidth / 80));
+            setFontSize(newFontSize);
 
-                const cols = Math.floor(svgWidth / (newFontSize * 0.6));
-                const rows = Math.floor(svgHeight / newFontSize);
+            const cols = Math.floor(svgWidth / (newFontSize * 0.6));
+            const rows = Math.floor(svgHeight / newFontSize);
 
-                const initialLines = initialText.split('\n');
-                const paddedInitialText = initialLines.map(line => line.padEnd(cols, ' '));
+            const initialLines = initialText.split('\n');
+            const paddedInitialText = initialLines.map(line => line.padEnd(cols, ' '));
 
-                while (paddedInitialText.length < rows) {
-                    paddedInitialText.push(' '.repeat(cols));
-                }
-
-                setDisplayText(paddedInitialText);
-
-                // Initialize circles
-                const numCircles = 50;
-                circlesRef.current = Array(numCircles).fill().map(() => ({
-                    x: Math.random() * cols,
-                    y: Math.random() * rows,
-                    radius: Math.random() * Math.min(cols, rows) / 4 + Math.min(cols, rows) / 8,
-                    speed: Math.random() * 0.1 + 0.05
-                }));
+            while (paddedInitialText.length < rows) {
+                paddedInitialText.push(' '.repeat(cols));
             }
+
+            setDisplayText(paddedInitialText);
+
+            // Initialize circles
+            const numCircles = 50;
+            circlesRef.current = Array(numCircles).fill().map(() => ({
+                x: Math.random() * cols,
+                y: Math.random() * rows,
+                radius: Math.random() * Math.min(cols, rows) / 4 + Math.min(cols, rows) / 8,
+                speed: Math.random() * 0.1 + 0.05
+            }));
         };
 
         updateTextSize();
@@ -277,21 +277,21 @@ const MorphingTextSVG = () => {
             id="bannerSVG"
             xmlns="http://www.w3.org/2000/svg"
             version="1.1"
+            width={svgDimensions.width}
+            height={svgDimensions.height}
             style={{
                 background: '#061434',
-                width: '100%',
-                height: '100%',
                 position: 'fixed',
                 top: 0,
                 left: 0
             }}
-            preserveAspectRatio="xMidYMid slice"
+            preserveAspectRatio="none"
         >
             {displayText.map((line, index) => (
                 <text
                     key={index}
-                    x="10"
-                    y={index * fontSize + fontSize}
+                    x="0"
+                    y={index * fontSize}
                     fill="rgba(102, 120, 172, 0.8)"
                     style={{
                         fontSize: `${fontSize}px`,
@@ -304,7 +304,7 @@ const MorphingTextSVG = () => {
                     {line}
                 </text>
             ))}
-            <g transform={`translate(${svgRef.current ? svgRef.current.clientWidth / 2 : 0}, ${svgRef.current ? svgRef.current.clientHeight / 2 : 0})`}>
+            <g transform={`translate(${svgDimensions.width / 2}, ${svgDimensions.height / 2})`}>
                 {getRevealedTitle().split('\n').map((line, index) => (
                     <text
                         key={index}
