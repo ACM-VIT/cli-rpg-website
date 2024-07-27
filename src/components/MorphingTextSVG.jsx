@@ -336,7 +336,7 @@ const MorphingTextSVG = () => {
                     whiteSpace: 'pre'
                 }}
             >
-                Made with {'<3'} by ACM-VIT
+                Made with ❤️ by ACM-VIT
             </text>
         </svg>
     );
