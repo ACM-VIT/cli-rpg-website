@@ -136,7 +136,7 @@ const Landing = () => {
                                         _hover={{ bg: 'gray.700' }}
                                         _active={{ bg: 'gray.800' }}
                                         shadow="lg"
-                                        px={{ base: 20, }} // Responsive padding
+                                        px={{ base: 20, md: 20 }} // Responsive padding
                                     >
                                         Download for {detectedOS}
                                     </Button>

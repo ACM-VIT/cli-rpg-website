@@ -149,7 +149,7 @@ const MorphingTextSVG = () => {
     const [titleRevealProgress, setTitleRevealProgress] = useState(0);
     const [delayPassed, setDelayPassed] = useState(false);
     const [fontSize, setFontSize] = useState(16);
-    const [svgDimensions, setSvgDimensions] = useState({ width: 100000, height: 0 });
+    const [svgDimensions, setSvgDimensions] = useState({ width: 0, height: 0 });
     const svgRef = useRef(null);
     const morphProgressRef = useRef(0);
     const animationPhaseRef = useRef(0);
@@ -166,7 +166,7 @@ const MorphingTextSVG = () => {
             const newFontSize = Math.max(8, Math.min(16, svgWidth / 80));
             setFontSize(newFontSize);
 
-            const cols = Math.floor(svgWidth / (newFontSize * 111.6));
+            const cols = Math.floor(svgWidth / (newFontSize * 0.6));
             const rows = Math.floor(svgHeight / newFontSize);
 
             const initialLines = initialText.split('\n');

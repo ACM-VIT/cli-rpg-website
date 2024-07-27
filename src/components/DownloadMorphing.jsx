@@ -41,7 +41,7 @@ const HOUSE_MAP: [&str; 32] = [
     "  /       Guest          |      ---------     || _ \\  <<== double",
     "                                                                  ",
     "                                                                  "
-`;
+];`;
 
 const logoShape = [
     "                                        ",
@@ -88,14 +88,14 @@ const DownloadMorphing = () => {
     useEffect(() => {
         const updateTextSize = () => {
             if (svgRef.current) {
-                const svgWidth = svgRef.current.clientWidth;
-                const svgHeight = svgRef.current.clientHeight;
+                const svgWidth = window.innerWidth;
+                const svgHeight = window.innerHeight;
 
                 const newFontSize = Math.max(8, Math.min(16, svgWidth / 80));
                 setFontSize(newFontSize);
 
-                const cols = Math.floor(svgWidth / (newFontSize * 0.6));
-                const rows = Math.floor(svgHeight / newFontSize);
+                const cols = Math.ceil(svgWidth / (newFontSize * 0.6));
+                const rows = Math.ceil(svgHeight / newFontSize);
 
                 const initialLines = initialText.split('\n');
                 const paddedInitialText = initialLines.map(line => line.padEnd(cols, ' '));
@@ -168,20 +168,21 @@ const DownloadMorphing = () => {
             xmlns="http://www.w3.org/2000/svg"
             version="1.1"
             style={{
-                background: '#FF9500', // Changed background color to orange
-                width: '100%',
-                height: '100%',
+                background: '#FF9500',
+                width: '100vw',
+                height: '100vh',
                 position: 'fixed',
                 top: 0,
-                left: 0
+                left: 0,
+                overflow: 'hidden'
             }}
-            preserveAspectRatio="xMidYMid slice"
+            preserveAspectRatio="none"
         >
             {displayText.map((line, index) => (
                 <text
                     key={index}
-                    x="10"
-                    y={index * fontSize + fontSize / 2}
+                    x="0"
+                    y={index * fontSize}
                     fill="#FFFFFF"
                     style={{
                         fontSize: `${fontSize}px`,
