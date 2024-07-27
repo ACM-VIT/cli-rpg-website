@@ -72,6 +72,15 @@ const Landing = () => {
                             _active={{ bg: 'gray.800' }}
                             shadow="lg"
                             px={{ base: 20, md: 20 }}
+                            onClick={() => {
+                                if (detectedOS === 'macOS') {
+                                    window.location.href = 'https://github.com/ACM-VIT/cli-top/releases/download/v1.5.0/cli-top-macos.zip';
+                                } else if (detectedOS === 'Windows') {
+                                    window.location.href = 'https://github.com/ACM-VIT/cli-top/releases/download/v1.5.0/cli-top-windows.zip';
+                                } else if (detectedOS === 'Linux') {
+                                    window.location.href = 'https://github.com/ACM-VIT/cli-top/releases/download/v1.5.0/cli-top-linux.zip';
+                                }
+                            }}
                         >
                             Download for {detectedOS}
                         </Button>
@@ -199,7 +208,9 @@ const Landing = () => {
                             }}
                         >
                             <Box position="absolute" top={0} left={0} right={0} bottom={0} zIndex={-1}>
-                                <DownloadMorphing /> {/* Added the morphing text as background */}
+                                {currentSection === 'download' && <DownloadMorphing />}
+                                {currentSection === 'setup' && <SetupMorphing />}
+                                {currentSection === 'about' && <AboutMorphing />}
                             </Box>
                             <Box
                                 position="absolute"
@@ -212,9 +223,10 @@ const Landing = () => {
                                 alignItems="center"
                                 justifyContent="center"
                                 zIndex={1}
-                                bg="rgba(0, 0, 0, 0)" // Adding a semi-transparent overlay for readability
+                                bg="rgba(0, 0, 0, 0)"
                             >
                                 <IconButton
+                                    key={currentSection}
                                     icon={<CloseIcon />}
                                     position="absolute"
                                     top={4}
@@ -229,6 +241,7 @@ const Landing = () => {
                                     _hover={{ bg: 'gray.100' }}
                                 />
                                 {renderContent()}
+
                                 {currentSection === 'download' && (
                                     <Box position="absolute" bottom={20} width="100%" textAlign="center">
                                         <Text fontSize="sm" color="black">
@@ -243,6 +256,15 @@ const Landing = () => {
                                                     color="black"
                                                     borderColor="black"
                                                     _hover={{ bg: 'black', color: 'white' }}
+                                                    onClick={() => {
+                                                        if (os === 'macOS') {
+                                                            window.location.href = 'https://github.com/ACM-VIT/cli-top/releases/download/v1.5.0/cli-top-macos.zip';
+                                                        } else if (os === 'Windows') {
+                                                            window.location.href = 'https://github.com/ACM-VIT/cli-top/releases/download/v1.5.0/cli-top-windows.zip';
+                                                        } else if (os === 'Linux') {
+                                                            window.location.href = 'https://github.com/ACM-VIT/cli-top/releases/download/v1.5.0/cli-top-linux.zip';
+                                                        }
+                                                    }}
                                                 >
                                                     {os}
                                                 </Button>
