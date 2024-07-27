@@ -54,11 +54,11 @@ const Landing = () => {
                     <Button
                         leftIcon={<DownloadIcon />}
                         className="landing-button"
-                        bg="black"
-                        color="green.400"
-                        borderRadius="0"
-                        _hover={{ bg: 'blackAlpha.800' }}
-                        _active={{ bg: 'blackAlpha.900' }}
+                        bg="orange.400"
+                        color="white"
+                        borderRadius="3"
+                        _hover={{ bg: 'orange.800' }}
+                        _active={{ bg: 'orange.900' }}
                         aria-label="Download"
                         onClick={onToggle}
                         fontFamily="monospace"
@@ -93,7 +93,7 @@ const Landing = () => {
                                 left: 0,
                                 right: 0,
                                 bottom: 0,
-                                backgroundColor: 'black',
+                                backgroundColor: 'orange',
                                 zIndex: 10,
                                 overflow: 'hidden',
                             }}
@@ -104,7 +104,7 @@ const Landing = () => {
                                 left={0}
                                 right={0}
                                 bottom={0}
-                                bg="black"
+                                bg="orange" // Changed background color to orange
                                 transform={`translateY(${scrollY * 0.3}px)`}
                                 transition="transform 0.1s ease-out"
                             >
@@ -128,24 +128,24 @@ const Landing = () => {
                                     right={4}
                                     onClick={onToggle}
                                     aria-label="Close"
-                                    bg="black"
-                                    color="green.400"
-                                    _hover={{ bg: 'blackAlpha.800' }}
+                                    bg="orange"
+                                    color="white"
+                                    _hover={{ bg: 'orange.800' }}
                                 />
                                 <VStack spacing={8}>
                                     <Button
                                         size="lg"
                                         width="250px"
-
-                                        color="green.400"
+                                        bg="orange"
+                                        color="white"
                                         variant="outline"
                                         borderRadius="0"
-                                        _hover={{ bg: 'blackAlpha.800' }}
+                                        _hover={{ bg: 'orange.800' }}
                                         fontFamily="monospace"
                                     >
                                         Download for {detectedOS}
                                     </Button>
-                                    <Text fontSize="sm" color="green.400" fontFamily="monospace">
+                                    <Text fontSize="sm" color="white" fontFamily="monospace">
                                         Not on {detectedOS}? Download for:
                                     </Text>
                                     <HStack spacing={4}>
@@ -154,9 +154,9 @@ const Landing = () => {
                                                 key={os}
                                                 size="sm"
                                                 variant="outline"
-                                                color="green.400"
-                                                borderColor="green.400"
-                                                _hover={{ bg: 'blackAlpha.800' }}
+                                                color="white"
+                                                borderColor="white"
+                                                _hover={{ bg: 'orange.800' }}
                                                 borderRadius="0"
                                                 fontFamily="monospace"
                                             >
