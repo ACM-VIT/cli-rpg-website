@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChakraProvider, Button, HStack, Box, IconButton, Flex, VStack, useDisclosure, Text } from '@chakra-ui/react';
-import { DownloadIcon, SettingsIcon, InfoIcon, CloseIcon } from '@chakra-ui/icons';
+import { DownloadIcon, CloseIcon } from '@chakra-ui/icons';
 import { motion, AnimatePresence } from 'framer-motion';
 import MorphingTextSVG from '../components/MorphingTextSVG';
 import theme from '../../theme';
@@ -24,7 +24,6 @@ const Landing = () => {
     };
 
     useEffect(() => {
-        // Detect OS
         const userAgent = window.navigator.userAgent.toLowerCase();
         if (userAgent.indexOf("win") > -1) setDetectedOS("Windows");
         else if (userAgent.indexOf("mac") > -1) setDetectedOS("macOS");
@@ -51,39 +50,35 @@ const Landing = () => {
                 <Box className="svg-container">
                     <MorphingTextSVG />
                 </Box>
-                <Flex className="button-section">
-                    <HStack spacing={2} className="left-buttons">
-                        <Button
-                            leftIcon={<DownloadIcon />}
-                            className="landing-button"
-                            bg="orange.500"
-                            color="white"
-                            borderRadius="full"
-                            _hover={{ bg: 'orange.600' }}
-                            _active={{ bg: 'orange.700' }}
-                            aria-label="Download"
-                            onClick={onToggle}
-                            display={['none', 'flex']}
-                        >
-                            Download
-                        </Button>
-                        <IconButton
-                            icon={<DownloadIcon />}
-                            className="landing-button"
-                            bg="orange.500"
-                            color="white"
-                            borderRadius="full"
-                            _hover={{ bg: 'orange.600' }}
-                            _active={{ bg: 'orange.700' }}
-                            aria-label="Download"
-                            onClick={onToggle}
-                            display={['flex', 'none']}
-                        />
-                        {/* Setup button remains unchanged */}
-                    </HStack>
-                    <Box className="right-button">
-                        {/* About button remains unchanged */}
-                    </Box>
+                <Flex className="button-section" justifyContent="center">
+                    <Button
+                        leftIcon={<DownloadIcon />}
+                        className="landing-button"
+                        bg="black"
+                        color="green.400"
+                        borderRadius="0"
+                        _hover={{ bg: 'blackAlpha.800' }}
+                        _active={{ bg: 'blackAlpha.900' }}
+                        aria-label="Download"
+                        onClick={onToggle}
+                        fontFamily="monospace"
+                        display={['none', 'flex']}
+                        px={8} // Added horizontal padding
+                    >
+                        Download
+                    </Button>
+                    <IconButton
+                        icon={<DownloadIcon />}
+                        className="landing-button"
+                        bg="black"
+                        color="green.400"
+                        borderRadius="0"
+                        _hover={{ bg: 'blackAlpha.800' }}
+                        _active={{ bg: 'blackAlpha.900' }}
+                        aria-label="Download"
+                        onClick={onToggle}
+                        display={['flex', 'none']}
+                    />
                 </Flex>
                 <AnimatePresence>
                     {isOpen && (
@@ -98,7 +93,7 @@ const Landing = () => {
                                 left: 0,
                                 right: 0,
                                 bottom: 0,
-                                backgroundColor: '#ED8936', // orange.500
+                                backgroundColor: 'black',
                                 zIndex: 10,
                                 overflow: 'hidden',
                             }}
@@ -109,7 +104,7 @@ const Landing = () => {
                                 left={0}
                                 right={0}
                                 bottom={0}
-                                bg="orange.500"
+                                bg="black"
                                 transform={`translateY(${scrollY * 0.3}px)`}
                                 transition="transform 0.1s ease-out"
                             >
@@ -133,23 +128,25 @@ const Landing = () => {
                                     right={4}
                                     onClick={onToggle}
                                     aria-label="Close"
-                                    bg="white"
-                                    color="orange.500"
-                                    _hover={{ bg: 'gray.100' }}
+                                    bg="black"
+                                    color="green.400"
+                                    _hover={{ bg: 'blackAlpha.800' }}
                                 />
                                 <VStack spacing={8}>
-                                    <Text fontSize="xl" color="white">Detected OS: {detectedOS}</Text>
                                     <Button
                                         size="lg"
-                                        width="200px"
-                                        bg="white"
-                                        color="orange.500"
-                                        _hover={{ bg: 'gray.100' }}
+                                        width="250px"
+
+                                        color="green.400"
+                                        variant="outline"
+                                        borderRadius="0"
+                                        _hover={{ bg: 'blackAlpha.800' }}
+                                        fontFamily="monospace"
                                     >
                                         Download for {detectedOS}
                                     </Button>
-                                    <Text fontSize="sm" color="white">
-                                        Not {detectedOS}? Download for:
+                                    <Text fontSize="sm" color="green.400" fontFamily="monospace">
+                                        Not on {detectedOS}? Download for:
                                     </Text>
                                     <HStack spacing={4}>
                                         {['Windows', 'macOS', 'Linux'].filter(os => os !== detectedOS).map(os => (
@@ -157,9 +154,11 @@ const Landing = () => {
                                                 key={os}
                                                 size="sm"
                                                 variant="outline"
-                                                color="white"
-                                                borderColor="white"
-                                                _hover={{ bg: 'orange.600' }}
+                                                color="green.400"
+                                                borderColor="green.400"
+                                                _hover={{ bg: 'blackAlpha.800' }}
+                                                borderRadius="0"
+                                                fontFamily="monospace"
                                             >
                                                 {os}
                                             </Button>

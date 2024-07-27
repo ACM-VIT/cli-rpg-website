@@ -56,3 +56,34 @@
 }
 
 
+
+.landing-container {
+    background-color: #ED8936; /* orange background */
+    color: green;
+    font-family: monospace;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-section {
+    margin-top: 20px;
+}
+
+.landing-button {
+    font-family: monospace;
+    border-radius: 0;
+    color: green.400;
+}
+
+.svg-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-button, .left-buttons {
+    display: none;
+}
