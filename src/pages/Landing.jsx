@@ -7,13 +7,19 @@ import theme from '../../theme';
 import './Landing.css';
 
 const Landing = () => {
-    const { isOpen, onToggle } = useDisclosure();
+    const { isOpen, onToggle, onClose } = useDisclosure();
     const [scrollY, setScrollY] = useState(0);
     const [detectedOS, setDetectedOS] = useState('');
 
     const handleScroll = () => {
         if (isOpen) {
             setScrollY(window.scrollY);
+        }
+    };
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Escape' && isOpen) {
+            onClose();
         }
     };
 
@@ -27,11 +33,16 @@ const Landing = () => {
 
         if (isOpen) {
             window.addEventListener('scroll', handleScroll);
+            window.addEventListener('keydown', handleKeyDown);
         } else {
             window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('keydown', handleKeyDown);
             setScrollY(0);
         }
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('keydown', handleKeyDown);
+        };
     }, [isOpen]);
 
     return (
@@ -101,7 +112,8 @@ const Landing = () => {
                                 bg="orange.500"
                                 transform={`translateY(${scrollY * 0.3}px)`}
                                 transition="transform 0.1s ease-out"
-                            />
+                            >
+                            </Box>
                             <Box
                                 position="absolute"
                                 top={0}
@@ -126,6 +138,7 @@ const Landing = () => {
                                     _hover={{ bg: 'gray.100' }}
                                 />
                                 <VStack spacing={8}>
+                                    <Text fontSize="xl" color="white">Detected OS: {detectedOS}</Text>
                                     <Button
                                         size="lg"
                                         width="200px"
@@ -136,7 +149,7 @@ const Landing = () => {
                                         Download for {detectedOS}
                                     </Button>
                                     <Text fontSize="sm" color="white">
-                                        Not on {detectedOS}? Download for:
+                                        Not {detectedOS}? Download for:
                                     </Text>
                                     <HStack spacing={4}>
                                         {['Windows', 'macOS', 'Linux'].filter(os => os !== detectedOS).map(os => (
