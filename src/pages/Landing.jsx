@@ -3,6 +3,8 @@ import { ChakraProvider, Button, HStack, Box, IconButton, Flex, VStack, useDiscl
 import { DownloadIcon, CloseIcon, SettingsIcon, InfoIcon } from '@chakra-ui/icons';
 import { motion, AnimatePresence } from 'framer-motion';
 import DownloadMorphing from '../components/DownloadMorphing';
+import SetupMorphing from '../components/SetupMorphing';
+import AboutMorphing from '../components/AboutMorphing';
 import theme from '../../theme';
 import './Landing.css';
 import MorphingTextSVG from '../components/MorphingTextSVG';
@@ -78,19 +80,13 @@ const Landing = () => {
             case 'setup':
                 return (
                     <VStack spacing={8} alignItems="center">
-                        <Text fontSize={{ base: '20px', md: '30px' }} color="purple.500">
-                            Setup Instructions
-                        </Text>
-                        {/* Add additional setup content here */}
+                        <SetupMorphing />
                     </VStack>
                 );
             case 'about':
                 return (
                     <VStack spacing={8} alignItems="center">
-                        <Text fontSize={{ base: '20px', md: '30px' }} color="teal.500">
-                            About Us
-                        </Text>
-                        {/* Add additional about content here */}
+                        <AboutMorphing />
                     </VStack>
                 );
             default:
