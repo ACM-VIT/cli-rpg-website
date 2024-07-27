@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChakraProvider, Button, HStack, Box, IconButton, Flex, VStack, useDisclosure, Text } from '@chakra-ui/react';
-import { DownloadIcon, CloseIcon } from '@chakra-ui/icons';
+import { DownloadIcon, CloseIcon, SettingsIcon, InfoIcon } from '@chakra-ui/icons';
 import { motion, AnimatePresence } from 'framer-motion';
 import DownloadMorphing from '../components/DownloadMorphing';
 import theme from '../../theme';
@@ -8,9 +8,10 @@ import './Landing.css';
 import MorphingTextSVG from '../components/MorphingTextSVG';
 
 const Landing = () => {
-    const { isOpen, onToggle, onClose } = useDisclosure();
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const [scrollY, setScrollY] = useState(0);
     const [detectedOS, setDetectedOS] = useState('');
+    const [currentSection, setCurrentSection] = useState('');
 
     const handleScroll = () => {
         if (isOpen) {
@@ -21,6 +22,7 @@ const Landing = () => {
     const handleKeyDown = (event) => {
         if (event.key === 'Escape' && isOpen) {
             onClose();
+            setCurrentSection('');
         }
     };
 
@@ -46,13 +48,63 @@ const Landing = () => {
         };
     }, [isOpen]);
 
+    const handleButtonClick = (section) => {
+        setCurrentSection(section);
+        onOpen();
+    };
+
+    const renderContent = () => {
+        switch (currentSection) {
+            case 'download':
+                return (
+                    <VStack spacing={8} alignItems="center">
+                        <Button
+                            size="lg"
+                            width={{ base: '80%', md: '500px' }}
+                            height={{ base: '60px', md: '80px' }}
+                            fontSize={{ base: '20px', md: '30px' }}
+                            bg="black"
+                            color="orange.500"
+                            borderRadius="full"
+                            _hover={{ bg: 'white' }}
+                            _active={{ bg: 'gray.800' }}
+                            shadow="lg"
+                            px={{ base: 20, md: 20 }}
+                        >
+                            Download for {detectedOS}
+                        </Button>
+                    </VStack>
+                );
+            case 'setup':
+                return (
+                    <VStack spacing={8} alignItems="center">
+                        <Text fontSize={{ base: '20px', md: '30px' }} color="purple.500">
+                            Setup Instructions
+                        </Text>
+                        {/* Add additional setup content here */}
+                    </VStack>
+                );
+            case 'about':
+                return (
+                    <VStack spacing={8} alignItems="center">
+                        <Text fontSize={{ base: '20px', md: '30px' }} color="teal.500">
+                            About Us
+                        </Text>
+                        {/* Add additional about content here */}
+                    </VStack>
+                );
+            default:
+                return null;
+        }
+    };
+
     return (
         <ChakraProvider theme={theme}>
             <Box className="landing-container" position="relative" overflow="hidden">
                 <Box className="svg-container">
                     <MorphingTextSVG />
                 </Box>
-                <Flex className="button-section" justifyContent="center">
+                <Flex className="button-section" justifyContent="center" spacing={4}>
                     <Button
                         leftIcon={<DownloadIcon />}
                         className="landing-button"
@@ -62,7 +114,7 @@ const Landing = () => {
                         _hover={{ bg: 'orange.600' }}
                         _active={{ bg: 'orange.700' }}
                         aria-label="Download"
-                        onClick={onToggle}
+                        onClick={() => handleButtonClick('download')}
                         display={['none', 'flex']}
                     >
                         Download
@@ -76,13 +128,66 @@ const Landing = () => {
                         _hover={{ bg: 'orange.600' }}
                         _active={{ bg: 'orange.700' }}
                         aria-label="Download"
-                        onClick={onToggle}
+                        onClick={() => handleButtonClick('download')}
+                        display={['flex', 'none']}
+                    />
+                    <Button
+                        leftIcon={<SettingsIcon />}
+                        className="landing-button"
+                        bg="purple.500"
+                        color="white"
+                        borderRadius="md"
+                        _hover={{ bg: 'purple.600' }}
+                        _active={{ bg: 'purple.700' }}
+                        aria-label="Setup"
+                        onClick={() => handleButtonClick('setup')}
+                        display={['none', 'flex']}
+                    >
+                        Setup
+                    </Button>
+                    <IconButton
+                        icon={<SettingsIcon />}
+                        className="landing-button"
+                        bg="purple.500"
+                        color="white"
+                        borderRadius="full"
+                        _hover={{ bg: 'purple.600' }}
+                        _active={{ bg: 'purple.700' }}
+                        aria-label="Setup"
+                        onClick={() => handleButtonClick('setup')}
+                        display={['flex', 'none']}
+                    />
+                    <Button
+                        leftIcon={<InfoIcon />}
+                        className="landing-button"
+                        bg="teal.500"
+                        color="white"
+                        borderRadius="md"
+                        _hover={{ bg: 'teal.600' }}
+                        _active={{ bg: 'teal.700' }}
+                        aria-label="About"
+                        onClick={() => handleButtonClick('about')}
+                        display={['none', 'flex']}
+                    >
+                        About
+                    </Button>
+                    <IconButton
+                        icon={<InfoIcon />}
+                        className="landing-button"
+                        bg="teal.500"
+                        color="white"
+                        borderRadius="full"
+                        _hover={{ bg: 'teal.600' }}
+                        _active={{ bg: 'teal.700' }}
+                        aria-label="About"
+                        onClick={() => handleButtonClick('about')}
                         display={['flex', 'none']}
                     />
                 </Flex>
                 <AnimatePresence>
                     {isOpen && (
                         <motion.div
+                            key={currentSection}
                             initial={{ y: '100%' }}
                             animate={{ y: 0 }}
                             exit={{ y: '100%' }}
@@ -118,48 +223,37 @@ const Landing = () => {
                                     position="absolute"
                                     top={4}
                                     right={4}
-                                    onClick={onToggle}
+                                    onClick={() => {
+                                        onClose();
+                                        setCurrentSection('');
+                                    }}
                                     aria-label="Close"
                                     bg="black"
                                     color="orange.500"
                                     _hover={{ bg: 'gray.100' }}
                                 />
-                                <VStack spacing={8} alignItems="center">
-                                    <Button
-                                        size="lg" // Changed size to lg
-                                        width={{ base: '80%', md: '500px' }} // Responsive width
-                                        height={{ base: '60px', md: '80px' }} // Responsive height
-                                        fontSize={{ base: '20px', md: '30px' }} // Responsive font size
-                                        bg="black"
-                                        color="orange.500"
-                                        borderRadius="full"
-                                        _hover={{ bg: 'white' }}
-                                        _active={{ bg: 'gray.800' }}
-                                        shadow="lg"
-                                        px={{ base: 20, md: 20 }} // Responsive padding
-                                    >
-                                        Download for {detectedOS}
-                                    </Button>
-                                </VStack>
-                                <Box position="absolute" bottom={20} width="100%" textAlign="center">
-                                    <Text fontSize="sm" color="black">
-                                        Not on {detectedOS}? Download for:
-                                    </Text>
-                                    <HStack spacing={4} justifyContent="center" mt={4}>
-                                        {['Windows', 'macOS', 'Linux'].filter(os => os !== detectedOS).map(os => (
-                                            <Button
-                                                key={os}
-                                                size="md"
-                                                variant="outline"
-                                                color="black"
-                                                borderColor="black"
-                                                _hover={{ bg: 'black', color: 'white' }}
-                                            >
-                                                {os}
-                                            </Button>
-                                        ))}
-                                    </HStack>
-                                </Box>
+                                {renderContent()}
+                                {currentSection === 'download' && (
+                                    <Box position="absolute" bottom={20} width="100%" textAlign="center">
+                                        <Text fontSize="sm" color="black">
+                                            Not on {detectedOS}? Download for:
+                                        </Text>
+                                        <HStack spacing={4} justifyContent="center" mt={4}>
+                                            {['Windows', 'macOS', 'Linux'].filter(os => os !== detectedOS).map(os => (
+                                                <Button
+                                                    key={os}
+                                                    size="md"
+                                                    variant="outline"
+                                                    color="black"
+                                                    borderColor="black"
+                                                    _hover={{ bg: 'black', color: 'white' }}
+                                                >
+                                                    {os}
+                                                </Button>
+                                            ))}
+                                        </HStack>
+                                    </Box>
+                                )}
                             </Box>
                         </motion.div>
                     )}
