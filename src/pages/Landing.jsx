@@ -59,7 +59,7 @@ const Landing = () => {
         switch (currentSection) {
             case 'download':
                 return (
-                    <VStack spacing={8} alignItems="center">
+                    <VStack spacing={8} alignItems="center" className='center'>
                         <Button
                             size="lg"
                             width={{ base: '80%', md: '500px' }}
@@ -79,13 +79,13 @@ const Landing = () => {
                 );
             case 'setup':
                 return (
-                    <VStack spacing={8} alignItems="center">
+                    <VStack spacing={8} alignItems="center" className='center'>
                         <SetupMorphing />
                     </VStack>
                 );
             case 'about':
                 return (
-                    <VStack spacing={8} alignItems="center">
+                    <VStack spacing={8} alignItems="center" className='center'>
                         <AboutMorphing />
                     </VStack>
                 );
