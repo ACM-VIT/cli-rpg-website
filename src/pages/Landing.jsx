@@ -133,7 +133,7 @@ const Landing = () => {
                                         bg="black"
                                         color="orange.500"
                                         borderRadius="full"
-                                        _hover={{ bg: 'gray.700' }}
+                                        _hover={{ bg: 'white' }}
                                         _active={{ bg: 'gray.800' }}
                                         shadow="lg"
                                         px={{ base: 20, md: 20 }} // Responsive padding
@@ -149,11 +149,11 @@ const Landing = () => {
                                         {['Windows', 'macOS', 'Linux'].filter(os => os !== detectedOS).map(os => (
                                             <Button
                                                 key={os}
-                                                size="sm"
+                                                size="md"
                                                 variant="outline"
                                                 color="black"
                                                 borderColor="black"
-                                                _hover={{ bg: 'orange.600' }}
+                                                _hover={{ bg: 'black', color: 'white' }}
                                             >
                                                 {os}
                                             </Button>
