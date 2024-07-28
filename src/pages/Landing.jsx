@@ -226,7 +226,7 @@ const Landing = () => {
                                 bg="rgba(0, 0, 0, 0)"
                             >
                                 <IconButton
-                                    key={currentSection}
+
                                     icon={<CloseIcon />}
                                     position="absolute"
                                     top={4}
@@ -237,8 +237,19 @@ const Landing = () => {
                                     }}
                                     aria-label="Close"
                                     bg="black"
-                                    color="orange.500"
+                                    color={() => {
+                                        if (currentSection === 'download') {
+                                            return 'orange.500'
+                                        }
+                                        else if (currentSection === 'setup') {
+                                            return 'purple.500'
+                                        }
+                                        else if (currentSection === 'about') {
+                                            return 'teal'
+                                        }
+                                    }}
                                     _hover={{ bg: 'gray.100' }}
+                                    zIndex='100'
                                 />
                                 {renderContent()}
 
