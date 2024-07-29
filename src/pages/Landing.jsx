@@ -74,11 +74,11 @@ const Landing = () => {
                             px={{ base: 20, md: 20 }}
                             onClick={() => {
                                 if (detectedOS === 'macOS') {
-                                    window.location.href = 'https://github.com/ACM-VIT/cli-rpg/releases/download/publish/cli-rpg-mac.zip';
+                                    window.location.href = 'https://github.com/JuxtaRYCT/rust-stopwatch/releases/download/release/cli-rpg-mac.zip';
                                 } else if (detectedOS === 'Windows') {
-                                    window.location.href = 'https://github.com/ACM-VIT/cli-rpg/releases/download/publish/cli-rpg-windows.zip';
+                                    window.location.href = 'https://github.com/JuxtaRYCT/rust-stopwatch/releases/download/release/cli-rpg-windows.zip';
                                 } else if (detectedOS === 'Linux') {
-                                    window.location.href = 'https://github.com/ACM-VIT/cli-rpg/releases/download/publish/cli-rpg-linux.zip';
+                                    window.location.href = 'https://github.com/JuxtaRYCT/rust-stopwatch/releases/download/release/cli-rpg-linux.zip';
                                 }
                             }}
                         >
@@ -269,9 +269,9 @@ const Landing = () => {
                                                     _hover={{ bg: 'black', color: 'white' }}
                                                     onClick={() => {
                                                         if (os === 'macOS') {
-                                                            window.location.href = 'https://github.com/ACM-VIT/cli-rpg/releases/download/publish/cli-rpg-mac.zip';
+                                                            window.location.href = 'https://github.com/JuxtaRYCT/rust-stopwatch/releases/download/release/cli-rpg-linux.zip';
                                                         } else if (os === 'Windows') {
-                                                            window.location.href = 'https://github.com/ACM-VIT/cli-rpg/releases/download/publish/cli-rpg-windows.zip';
+                                                            window.location.href = 'https://github.com/JuxtaRYCT/rust-stopwatch/releases/download/release/cli-rpg-windows.zip';
                                                         } else if (os === 'Linux') {
                                                             window.location.href = 'https://github.com/ACM-VIT/cli-rpg/releases/download/publish/cli-rpg-linux.zip';
                                                         }
