@@ -236,11 +236,17 @@ Step 8: Use the command \`cli-rpg tutorial\` for instructions.
 # Link for installation: https://alacritty.org/
 `;
 
-
         let currentIndex = 0;
         const animateText = () => {
             if (currentIndex < fullInstructions.length) {
-                setInstructionsText(prevText => prevText + fullInstructions[currentIndex]);
+                setInstructionsText(prevText => {
+                    const newText = prevText + fullInstructions[currentIndex];
+                    // Scroll to the bottom of the text container
+                    if (instructionsRef.current) {
+                        instructionsRef.current.scrollTop = instructionsRef.current.scrollHeight;
+                    }
+                    return newText;
+                });
                 currentIndex++;
                 setTimeout(animateText, 0.5); // Increase typing speed
             }

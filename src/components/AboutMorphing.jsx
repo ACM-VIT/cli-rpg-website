@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 
 const initialText = `  "                                                                            @@@@@@@@@@@@@@                                                          
@@ -96,6 +97,7 @@ const logoShape = [
     "  #####################################  ",
 ];
 
+
 const AboutMorphing = () => {
     const [displayText, setDisplayText] = useState([]);
     const [fontSize, setFontSize] = useState(16);
@@ -177,6 +179,9 @@ const AboutMorphing = () => {
                 );
             });
 
+            // Scroll the page as the text moves down
+            window.scrollBy(0, 2);
+
             if (animationPhaseRef.current === 0) {
                 morphProgressRef.current += 0.1;
                 if (morphProgressRef.current >= 100) {
@@ -196,8 +201,6 @@ const AboutMorphing = () => {
 
     const startInstructionsAnimation = () => {
         const fullInstructions = `
-
-        
 About the Game
 
 Mystery of the Forgotten is a text-based adventure game that takes you on a journey through a mysterious world filled with secrets, challenges, and intriguing characters. As the player, you will explore various locations, solve puzzles, and uncover the mysteries of the game.
@@ -225,13 +228,19 @@ ACM-VIT, established in 2009, stands as a highly esteemed technical chapter with
 
 
 ACM-VIT has been working on projects related to graphic designing, web development, machine learning and app development and has been organizing events and workshop for the same. Apart from this, ACM-VIT also boasts of its own research wing, the only chapter in VIT to have that. 🎨🌐
-
 `;
 
         let currentIndex = 0;
         const animateText = () => {
             if (currentIndex < fullInstructions.length) {
-                setInstructionsText(prevText => prevText + fullInstructions[currentIndex]);
+                setInstructionsText(prevText => {
+                    const newText = prevText + fullInstructions[currentIndex];
+                    // Scroll to the bottom of the text container
+                    if (instructionsRef.current) {
+                        instructionsRef.current.scrollTop = instructionsRef.current.scrollHeight;
+                    }
+                    return newText;
+                });
                 currentIndex++;
                 setTimeout(animateText, 5); // Increase typing speed
             }
@@ -281,22 +290,95 @@ ACM-VIT has been working on projects related to graphic designing, web developme
             }}
             preserveAspectRatio="none"
         >
-            {displayText.map((line, index) => (
-                <text
-                    key={index}
-                    x={window.innerWidth < 768 ? (window.innerWidth / 2) - (line.length * fontSize * 0.3 / 2) : 0}
-                    y={window.innerWidth < 768 ? (window.innerHeight / 1) - ((displayText.length * fontSize) / 2) + index * fontSize : index * fontSize}
-                    fill="#FFFFFF"
-                    style={{
-                        fontSize: `${fontSize}px`,
-                        fontFamily: 'monospace',
-                        dominantBaseline: 'hanging',
-                        whiteSpace: 'pre',
-                    }}
-                >
-                    {line}
-                </text>
-            ))}
+            <svg
+                ref={svgRef}
+                xmlns="http://www.w3.org/2000/svg"
+                version="1.1"
+                style={{
+                    background: 'teal',
+                    width: '100vw',
+                    height: '100vh',
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    overflow: 'hidden',
+                }}
+                preserveAspectRatio="none"
+            >
+                {displayText.map((line, index) => (
+                    <text
+                        key={index}
+                        x={window.innerWidth < 768 ? (window.innerWidth / 2) - (line.length * fontSize * 0.3 / 2) : 0}
+                        y={window.innerWidth < 768 ? (window.innerHeight / 1) - ((displayText.length * fontSize) / 2) + index * fontSize : index * fontSize}
+                        fill="#FFFFFF"
+                        style={{
+                            fontSize: `${fontSize}px`,
+                            fontFamily: 'monospace',
+                            dominantBaseline: 'hanging',
+                            whiteSpace: 'pre',
+                        }}
+                    >
+                        {line}
+                    </text>
+                ))}
+                {showCenterText && (
+                    <foreignObject x="10%" y="5%" width="80%" height="90%">
+                        <div
+                            ref={instructionsRef}
+                            xmlns="http://www.w3.org/1999/xhtml"
+                            style={{
+                                color: '#FFFFFF',
+                                fontFamily: 'monospace',
+                                textAlign: 'left',
+                                height: '100%',
+                                overflowY: 'auto',
+                                whiteSpace: 'pre-wrap',
+                                wordBreak: 'break-word',
+                                scrollbarWidth: 'auto',
+                                msOverflowStyle: 'auto',
+                                padding: '15px',
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                margin: 'auto',
+                                fontSize: '18px',
+                                transform: 'translateY(100%)',
+                                transition: 'transform 1s ease-in-out',
+                            }}
+                            onScroll={handleScroll}
+                        >
+                            <style>
+                                {`
+                            div::-webkit-scrollbar {
+                                display: block;
+                            }
+                            `}
+                            </style>
+                            <h2 style={{ textAlign: 'center' }}>About</h2><br />
+                            <span dangerouslySetInnerHTML={{ __html: instructionsText }} />
+                        </div>
+                    </foreignObject>
+                )}
+                {showCenterText && (
+                    <g>
+                        <rect
+                            x="90%"
+                            y="5%"
+                            width="0.5%"
+                            height="90%"
+                            fill="#000000"
+                            opacity="0.3"
+                        />
+                        <rect
+                            x="90%"
+                            y={`${5 + scrollPosition * 90}%`}
+                            width="0.5%"
+                            height="5%"
+                            fill="#000000"
+                            rx="1"
+                            ry="1"
+                        />
+                    </g>
+                )}
+            </svg>
             {showCenterText && (
                 <foreignObject x="10%" y="5%" width="80%" height="90%">
                     <div
@@ -333,27 +415,7 @@ ACM-VIT has been working on projects related to graphic designing, web developme
                     </div>
                 </foreignObject>
             )}
-            {showCenterText && (
-                <g>
-                    <rect
-                        x="90%"
-                        y="5%"
-                        width="0.5%"
-                        height="90%"
-                        fill="#000000"
-                        opacity="0.3"
-                    />
-                    <rect
-                        x="90%"
-                        y={`${5 + scrollPosition * 90}%`}
-                        width="0.5%"
-                        height="5%"
-                        fill="#000000"
-                        rx="1"
-                        ry="1"
-                    />
-                </g>
-            )}
+            {/* ... (keep the existing scroll bar SVG content) */}
         </svg>
     );
 };
