@@ -152,82 +152,64 @@ const SetupMorphing = () => {
 
     const startInstructionsAnimation = () => {
         const fullInstructions = `
-For All Operating Systems
-1. Download the appropriate CLI-RPG file for your operating system.
+Steps to run the game on Windows:
 
-2. Create a dedicated folder for the CLI-RPG tool, such as C:\\Users\\[username]\\cli-rpg on Windows, or a similar location on Linux/MacOS.
+Step 1: Download the zip folder from the \`cli-rpg.acmvit.in\` website.
+Step 2: Extract the contents of the zip file using an extraction tool like WinRAR or 7-Zip.
+        Example:
+        \`\`\`
+        Right-click on the zip file -> Extract Here
+        \`\`\`
+Step 3: Navigate to the extracted directory in Command Prompt or PowerShell.
+        Example:
+        \`\`\`
+        cd Downloads\\cli-rpg
+        dir
+        \`\`\`
+Step 4: Use the command \`start cli-rpg.exe start\` to run the game.
+Step 5: Use the command \`start cli-rpg.exe tutorial\` for instructions.
 
-3. Move the downloaded file to the created folder.
+# Ensure that your terminal is run in full-screen mode.
+# It is recommended to run the game using the Alacritty terminal.
+# Link for installation: https://alacritty.org/
 
-<span style="color:green">Windows</span>
+Steps to run the game on macOS:
 
-Downloading the Game
-- Download the Executable File:
-  - Download the cli-rpg.exe file from the site to your desired location.
+Step 1: Install the zip folder from the \`cli-rpg.acmvit.in\` website.
+Step 2: It is recommended to download Alacritty and use it as the terminal for running the game.
+        Link for installation: https://alacritty.org/
+Step 3: Use the terminal commands \`cd\` and \`ls\` to navigate to the directory where the game files are located.
+        Example:
+        \`\`\`
+        cd Downloads/cli-rpg
+        ls
+        \`\`\`
+Step 4: To start the game, use the command \`./cli-rpg start\`.
+Step 5: For the instructions, use the command \`./cli-rpg tutorial\`.
 
-Installation Guide
-1. Run the Installer:
-   - Double-click on the cli-rpg.exe file to start the installation process.
-   - If prompted by Windows Defender or another security system, click on "More info" and then "Run anyway" to trust the file and continue with the installation.
-   - Follow the on-screen instructions to complete the installation.
+# Ensure that your terminal is run in full-screen mode.
+# It is recommended to run the game using the Alacritty terminal.
+# Link for installation: https://alacritty.org/
 
-Running the Game
+Steps to run the game on Linux:
 
-Method 1: Double-click the File
-- Simply double-click the cli-rpg.exe file to start the game.
+Step 1: Download the zip folder from the \`cli-rpg.acmvit.in\` website.
+Step 2: Extract the contents of the zip file using a command like \`unzip\` or a file manager.
+        Example:
+        \`\`\`
+        unzip cli-rpg.zip
+        \`\`\`
+Step 3: Navigate to the extracted directory using \`cd\`.
+        Example:
+        \`\`\`
+        cd cli-rpg
+        \`\`\`
+Step 4: Use the command \`./cli-rpg start\` to run the game.
+Step 5: Use the command \`./cli-rpg tutorial\` for instructions.
 
-Method 2: Using Terminal/Command Prompt
-1. Open a Terminal/Command Prompt:
-   - Navigate to the directory where cli-rpg.exe is located.
-2. Execute the Game:
-   - Type: cli-rpg.exe
-3. Follow On-Screen Instructions:
-   - After launching, follow the prompts to create your character and begin your adventure.
-
-<span style="color:green">Linux</span>
-
-Downloading the Game
-- Download the appropriate CLI-RPG file for your system.
-
-Installation Guide
-1. Open a terminal and navigate to the CLI-RPG folder.
-2. Modify your shell's profile script to include the CLI-RPG folder in your PATH environment variable.
-3. Apply changes by restarting the terminal.
-
-Running the Game
-1. Navigate to the CLI-RPG folder in the terminal.
-2. Make the file executable if necessary:
-   - Check permissions: Use ls -l ./cli-rpg to view the file's permissions.
-   - Add execute permission: If the "x" flag is missing, use chmod +x ./cli-rpg to grant it.
-3. Execute the Game:
-   - Type: ./cli-rpg
-4. Follow On-Screen Instructions:
-   - After launching, follow the prompts to create your character and begin your adventure.
-
-<span style="color:green">MacOS</span>
-
-Downloading the Game
-- Download the appropriate CLI-RPG file for your system.
-
-Installation Guide
-1. Open a terminal and navigate to the CLI-RPG folder.
-2. Modify your shell's profile script (usually .zshrc in the root folder, maybe a hidden file) to include the CLI-RPG folder in your PATH environment variable.
-3. Apply changes by restarting the terminal.
-
-Running the Game
-1. Navigate to the CLI-RPG folder in the terminal.
-2. Make the file executable if necessary:
-   - Check permissions: Use ls -l ./cli-rpg to view the file's permissions.
-   - Add execute permission: If the "x" flag is missing, use chmod +x ./cli-rpg to grant it.
-   - Remove quarantine flag: Use xattr -d com.apple.quarantine ./cli-rpg to remove the quarantine flag.
-3. Execute the Game:
-   - Type: ./cli-rpg
-4. Follow On-Screen Instructions:
-   - After launching, follow the prompts to create your character and begin your adventure.
-
-Verify the installation by running cli-rpg in your command line or terminal. The tool should launch successfully. Enjoy your adventure in the world of CLI-RPG!
-
-
+# Ensure that your terminal is run in full-screen mode.
+# It is recommended to run the game using the Alacritty terminal.
+# Link for installation: https://alacritty.org/
 `;
 
         let currentIndex = 0;
@@ -240,7 +222,6 @@ Verify the installation by running cli-rpg in your command line or terminal. The
         };
 
         animateText();
-
 
         setTimeout(() => {
             if (instructionsRef.current) {
