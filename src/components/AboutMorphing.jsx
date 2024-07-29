@@ -55,12 +55,36 @@ const initialText = `  "                                                        
 "                                                                         @@@@@@@@@@@@@@@@@@@@@@@@                                                                          i",
 "                                                                           @@@@@@@@@@@@@@@@@@@@                                                                            i",
 "                                                                              @@@@@@@@@@@@@@                                                                               i";
+`;
 
+const smallScreenText = `                    :+#%@@@#+-                    
+                  :#@@@@@@@@@@%=                  
+                :#@@@@@@@@@@@@@@%=                
+              :#@@@@@@@@@@@@@@@@@@%=              
+            :#@@@@@@@@@@@@@@@@@@@@@@%=            
+          :#@@@@@@@@@@@@@@@@@@@@@@@@@@%=          
+        :#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%=        
+      -%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@=      
+    :#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%=    
+  :#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%=  
+ *@@@@@@@@@%*++*#@@@@#*+*%%**@#++#@%*+*@@@@@@@@@# 
++@@@@@@@@@@+=+=: .@*  .--+*  .:.  ..:  .@@@@@@@@@*
+@@@@@@@@@@%-.:-:  %   @@@@*  -@@  :@@=  @@@@@@@@@@
+*@@@@@@@@@=  **:  %=  :+***  =@@  -@@=  @@@@@@@@@#
+ #@@@@@@@@@+--=#==%@%+=--*%==#@@==*@@#==@@@@@@@@%.
+  =%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+  
+    =%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+    
+      =@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*.     
+        =%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+.       
+          =%@@@@@@@@@@@@@@@@@@@@@@@@@@@+          
+            =%@@@@@@@@@@@@@@@@@@@@@@@+            
+              =%@@@@@@@@@@@@@@@@@@@+.             
+                =%@@@@@@@@@@@@@@@+                
+                  =%@@@@@@@@@@@+                  
+                    -+#@@@@%*=                    
 `;
 
 const logoShape = [
-
-
     "  #####################################  ",
     "  #####################################  ",
     "  #####################################  ",
@@ -71,13 +95,7 @@ const logoShape = [
     "  #####################################  ",
     "  #####################################  ",
     "  #####################################  ",
-
-
-
 ];
-
-
-
 
 const AboutMorphing = () => {
     const [displayText, setDisplayText] = useState([]);
@@ -92,13 +110,19 @@ const AboutMorphing = () => {
                 const svgWidth = window.innerWidth;
                 const svgHeight = window.innerHeight;
 
+                let newText = initialText;
+
+                if (svgWidth < 768) { // Adjust the width threshold as needed
+                    newText = smallScreenText;
+                }
+
                 const newFontSize = Math.max(8, Math.min(16, svgWidth / 80));
                 setFontSize(newFontSize);
 
                 const cols = Math.ceil(svgWidth / (newFontSize * 0.6));
                 const rows = Math.ceil(svgHeight / newFontSize);
 
-                const initialLines = initialText.split('\n');
+                const initialLines = newText.split('\n');
                 const paddedInitialText = initialLines.map(line => line.padEnd(cols, ' '));
 
                 while (paddedInitialText.length < rows) {
@@ -127,20 +151,24 @@ const AboutMorphing = () => {
                     line.split('').map((char, x) => {
                         const normalizedX = Math.floor((x / cols) * logoShape[0].length);
                         const normalizedY = Math.floor((y / rows) * logoShape.length);
-                        const isLogoPixel = logoShape[normalizedY][normalizedX] === '#';
+                        const isLogoPixel = logoShape[normalizedY] && logoShape[normalizedY][normalizedX] === '#';
 
-                        if (animationPhaseRef.current === 0) {
-                            if (Math.random() < 0.01 + morphProgressRef.current / 1000) {
-                                return isLogoPixel ? ' ' : String.fromCharCode(33 + Math.floor(Math.random() * 94));
-                            }
-                        } else if (animationPhaseRef.current === 1) {
-                            if (isLogoPixel) {
-                                return Math.random() < morphProgressRef.current / 100 ? ' ' : char;
-                            } else {
-                                return Math.random() < morphProgressRef.current / 100 ?
-                                    String.fromCharCode(33 + Math.floor(Math.random() * 94)) : char;
+                        if (window.innerWidth >= 768) {
+                            // Animation logic only for larger screens
+                            if (animationPhaseRef.current === 0) {
+                                if (Math.random() < 0.01 + morphProgressRef.current / 1000) {
+                                    return isLogoPixel ? ' ' : String.fromCharCode(33 + Math.floor(Math.random() * 94));
+                                }
+                            } else if (animationPhaseRef.current === 1) {
+                                if (isLogoPixel) {
+                                    return Math.random() < morphProgressRef.current / 100 ? ' ' : char;
+                                } else {
+                                    return Math.random() < morphProgressRef.current / 100 ?
+                                        String.fromCharCode(33 + Math.floor(Math.random() * 94)) : char;
+                                }
                             }
                         }
+
                         return char;
                     }).join('')
                 );
@@ -175,15 +203,15 @@ const AboutMorphing = () => {
                 position: 'fixed',
                 top: 0,
                 left: 0,
-                overflow: 'hidden'
+                overflow: 'hidden',
             }}
             preserveAspectRatio="none"
         >
             {displayText.map((line, index) => (
                 <text
                     key={index}
-                    x="0"
-                    y={index * fontSize}
+                    x={window.innerWidth < 768 ? (window.innerWidth / 2.1) - (line.length * fontSize * 0.3 / 2) : 0}
+                    y={window.innerWidth < 768 ? (window.innerHeight / 1) - ((displayText.length * fontSize) / 2) + index * fontSize : index * fontSize}
                     fill="#FFFFFF"
                     style={{
                         fontSize: `${fontSize}px`,
