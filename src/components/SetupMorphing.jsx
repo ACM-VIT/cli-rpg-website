@@ -166,8 +166,11 @@ Step 3: Navigate to the extracted directory in Command Prompt or PowerShell.
         cd Downloads\\cli-rpg
         dir
         \`\`\`
-Step 4: Use the command \`start cli-rpg.exe start\` to run the game.
-Step 5: Use the command \`start cli-rpg.exe tutorial\` for instructions.
+Step 4: Access System Properties and open Environment Variables.
+Step 5: Edit the 'Path' variable under User variables to include the path to your CLI-RPG folder.
+Step 6: Apply changes.
+Step 7: Use the command \`cli-rpg start\` to run the game.
+Step 8: Use the command \`cli-rpg tutorial\` for instructions.
 
 # Ensure that your terminal is run in full-screen mode.
 # It is recommended to run the game using the Alacritty terminal.
@@ -184,8 +187,21 @@ Step 3: Use the terminal commands \`cd\` and \`ls\` to navigate to the directory
         cd Downloads/cli-rpg
         ls
         \`\`\`
-Step 4: To start the game, use the command \`./cli-rpg start\`.
-Step 5: For the instructions, use the command \`./cli-rpg tutorial\`.
+Step 4: Modify your shell's profile script (usually \`.zshrc\` in the root folder, maybe a hidden file, to see hidden files use the key combination - \`Shift+Command+.\`) to include the CLI-RPG folder in your PATH environment variable.
+        Example:
+        \`\`\`
+        echo 'export PATH=\$PATH:/path/to/CLI-RPG' >> ~/.zshrc
+        source ~/.zshrc
+        \`\`\`
+Step 5: Try running the command \`cli-rpg\`. If you do not see the logo, proceed with the following steps:
+        a) Failure to grant full disk access may result in the Terminal error "Operation not permitted." To resolve this issue, navigate to System Preferences > Security & Privacy > Privacy panel, and include Terminal in the Full Disk Access list.
+        b) If the \`cli-rpg\` command still doesn't work, execute the steps that follow:
+           - Check permissions: Use \`ls -l ./cli-rpg\` to view the file's permissions.
+           - Add execute permission: If the "x" flag is missing, use \`chmod +x ./cli-rpg\` to grant it.
+           - Remove quarantine flag: Use \`xattr -d com.apple.quarantine ./cli-rpg\` to remove the quarantine flag.
+Step 6: Apply changes by restarting the terminal.
+Step 7: To start the game, use the command \`./cli-rpg start\`.
+Step 8: For the instructions, use the command \`./cli-rpg tutorial\`.
 
 # Ensure that your terminal is run in full-screen mode.
 # It is recommended to run the game using the Alacritty terminal.
@@ -204,13 +220,22 @@ Step 3: Navigate to the extracted directory using \`cd\`.
         \`\`\`
         cd cli-rpg
         \`\`\`
-Step 4: Use the command \`./cli-rpg start\` to run the game.
-Step 5: Use the command \`./cli-rpg tutorial\` for instructions.
+Step 4: Open a terminal and navigate to the CLI-RPG folder.
+Step 5: Modify your shell's profile script to include the CLI-RPG folder in your PATH environment variable.
+        Example for \`.bashrc\`:
+        \`\`\`
+        echo 'export PATH=\$PATH:/path/to/CLI-RPG' >> ~/.bashrc
+        source ~/.bashrc
+        \`\`\`
+Step 6: Apply changes by restarting the terminal.
+Step 7: Use the command \`cli-rpg start\` to run the game.
+Step 8: Use the command \`cli-rpg tutorial\` for instructions.
 
 # Ensure that your terminal is run in full-screen mode.
 # It is recommended to run the game using the Alacritty terminal.
 # Link for installation: https://alacritty.org/
 `;
+
 
         let currentIndex = 0;
         const animateText = () => {
