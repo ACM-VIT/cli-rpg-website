@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 
 const initialText = `  "                                                                            @@@@@@@@@@@@@@                                                          
@@ -57,31 +56,8 @@ const initialText = `  "                                                        
 "                                                                           @@@@@@@@@@@@@@@@@@@@                                                                            
 "                                                                              @@@@@@@@@@@@@@                                                                               
 `
-const smallScreenText = `                    :+#%@@@#+-                   
-                  :#@@@@@@@@@@%=                  
-                :#@@@@@@@@@@@@@@%=                
-              :#@@@@@@@@@@@@@@@@@@%=              
-            :#@@@@@@@@@@@@@@@@@@@@@@%=            
-          :#@@@@@@@@@@@@@@@@@@@@@@@@@@%=          
-        :#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%=        
-      -%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@=      
-    :#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%=    
-  :#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%=  
- *@@@@@@@@@%*++*#@@@@#*+*%%**@#++#@%*+*@@@@@@@@@# 
-+@@@@@@@@@@+=+=: .@*  .--+*  .:.  ..:  .@@@@@@@@@*
-@@@@@@@@@@%-.:-:  %   @@@@*  -@@  :@@=  @@@@@@@@@@
-*@@@@@@@@@=  **:  %=  :+***  =@@  -@@=  @@@@@@@@@#
- #@@@@@@@@@+--=#==%@%+=--*%==#@@==*@@#==@@@@@@@@%.
-  =%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+  
-    =%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+    
-      =@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*.     
-        =%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+.       
-          =%@@@@@@@@@@@@@@@@@@@@@@@@@@@+          
-            =%@@@@@@@@@@@@@@@@@@@@@@@+            
-              =%@@@@@@@@@@@@@@@@@@@+.             
-                =%@@@@@@@@@@@@@@@+                
-                  =%@@@@@@@@@@@+                  
-                    -+#@@@@%*=                    
+const smallScreenText = `                             
+                              
 `;
 
 const logoShape = [
@@ -108,34 +84,29 @@ const AboutMorphing = () => {
     const instructionsRef = useRef(null);
     const animationPhaseRef = useRef(0);
     const morphProgressRef = useRef(0);
+    const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
 
     useEffect(() => {
         const updateTextSize = () => {
-            if (svgRef.current) {
-                const svgWidth = window.innerWidth;
-                const svgHeight = window.innerHeight;
+            const svgWidth = window.innerWidth;
+            const svgHeight = window.innerHeight;
+            setIsSmallScreen(svgWidth < 768);
 
-                let newText = initialText;
+            let newText = isSmallScreen ? smallScreenText : initialText;
+            const newFontSize = Math.max(8, Math.min(16, svgWidth / 80));
+            setFontSize(newFontSize);
 
-                if (svgWidth < 768) { // Adjust the width threshold as needed
-                    newText = smallScreenText;
-                }
+            const cols = Math.ceil(svgWidth / (newFontSize * 0.6));
+            const rows = Math.ceil(svgHeight / newFontSize);
 
-                const newFontSize = Math.max(8, Math.min(16, svgWidth / 80));
-                setFontSize(newFontSize);
+            const initialLines = newText.split('\n');
+            const paddedInitialText = initialLines.map(line => line.padEnd(cols, ' '));
 
-                const cols = Math.ceil(svgWidth / (newFontSize * 0.6));
-                const rows = Math.ceil(svgHeight / newFontSize);
-
-                const initialLines = newText.split('\n');
-                const paddedInitialText = initialLines.map(line => line.padEnd(cols, ' '));
-
-                while (paddedInitialText.length < rows) {
-                    paddedInitialText.push(' '.repeat(cols));
-                }
-
-                setDisplayText(paddedInitialText);
+            while (paddedInitialText.length < rows) {
+                paddedInitialText.push(' '.repeat(cols));
             }
+
+            setDisplayText(paddedInitialText);
         };
 
         updateTextSize();
@@ -144,7 +115,7 @@ const AboutMorphing = () => {
         return () => {
             window.removeEventListener('resize', updateTextSize);
         };
-    }, []);
+    }, [isSmallScreen]);
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -158,7 +129,7 @@ const AboutMorphing = () => {
                         const normalizedY = Math.floor((y / rows) * logoShape.length);
                         const isLogoPixel = logoShape[normalizedY] && logoShape[normalizedY][normalizedX] === '#';
 
-                        if (window.innerWidth >= 768) {
+                        if (!isSmallScreen) {
                             // Animation logic only for larger screens
                             if (animationPhaseRef.current === 0) {
                                 if (Math.random() < 0.01 + morphProgressRef.current / 1000) {
@@ -190,14 +161,14 @@ const AboutMorphing = () => {
                 }
             } else if (animationPhaseRef.current === 1) {
                 morphProgressRef.current += 0.5;
-                if (morphProgressRef.current >= 100) {
+                if (!isSmallScreen && morphProgressRef.current >= 100) {
                     clearInterval(intervalId);
                 }
             }
         }, 50);
 
         return () => clearInterval(intervalId);
-    }, []);
+    }, [isSmallScreen]);
 
     const startInstructionsAnimation = () => {
         const fullInstructions = `
@@ -257,16 +228,16 @@ ACM-VIT has been working on projects related to graphic designing, web developme
     };
 
     useEffect(() => {
-        // Show text after 2 seconds
+        // Show text after 2 seconds for large screens, immediately for small screens
         const textTimerId = setTimeout(() => {
             setShowCenterText(true);
             startInstructionsAnimation();
-        }, 2000);
+        }, isSmallScreen ? 0 : 2000);
 
         return () => {
             clearTimeout(textTimerId);
         };
-    }, []);
+    }, [isSmallScreen]);
 
     const handleScroll = (e) => {
         const { scrollTop, scrollHeight, clientHeight } = e.target;
@@ -290,95 +261,22 @@ ACM-VIT has been working on projects related to graphic designing, web developme
             }}
             preserveAspectRatio="none"
         >
-            <svg
-                ref={svgRef}
-                xmlns="http://www.w3.org/2000/svg"
-                version="1.1"
-                style={{
-                    background: 'teal',
-                    width: '100vw',
-                    height: '100vh',
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    overflow: 'hidden',
-                }}
-                preserveAspectRatio="none"
-            >
-                {displayText.map((line, index) => (
-                    <text
-                        key={index}
-                        x={window.innerWidth < 768 ? (window.innerWidth / 2) - (line.length * fontSize * 0.3 / 2) : 0}
-                        y={window.innerWidth < 768 ? (window.innerHeight / 1) - ((displayText.length * fontSize) / 2) + index * fontSize : index * fontSize}
-                        fill="#FFFFFF"
-                        style={{
-                            fontSize: `${fontSize}px`,
-                            fontFamily: 'monospace',
-                            dominantBaseline: 'hanging',
-                            whiteSpace: 'pre',
-                        }}
-                    >
-                        {line}
-                    </text>
-                ))}
-                {showCenterText && (
-                    <foreignObject x="10%" y="5%" width="80%" height="90%">
-                        <div
-                            ref={instructionsRef}
-                            xmlns="http://www.w3.org/1999/xhtml"
-                            style={{
-                                color: '#FFFFFF',
-                                fontFamily: 'monospace',
-                                textAlign: 'left',
-                                height: '100%',
-                                overflowY: 'auto',
-                                whiteSpace: 'pre-wrap',
-                                wordBreak: 'break-word',
-                                scrollbarWidth: 'auto',
-                                msOverflowStyle: 'auto',
-                                padding: '15px',
-                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                                margin: 'auto',
-                                fontSize: '18px',
-                                transform: 'translateY(100%)',
-                                transition: 'transform 1s ease-in-out',
-                            }}
-                            onScroll={handleScroll}
-                        >
-                            <style>
-                                {`
-                            div::-webkit-scrollbar {
-                                display: block;
-                            }
-                            `}
-                            </style>
-                            <h2 style={{ textAlign: 'center' }}>About</h2><br />
-                            <span dangerouslySetInnerHTML={{ __html: instructionsText }} />
-                        </div>
-                    </foreignObject>
-                )}
-                {showCenterText && (
-                    <g>
-                        <rect
-                            x="90%"
-                            y="5%"
-                            width="0.5%"
-                            height="90%"
-                            fill="#000000"
-                            opacity="0.3"
-                        />
-                        <rect
-                            x="90%"
-                            y={`${5 + scrollPosition * 90}%`}
-                            width="0.5%"
-                            height="5%"
-                            fill="#000000"
-                            rx="1"
-                            ry="1"
-                        />
-                    </g>
-                )}
-            </svg>
+            {displayText.map((line, index) => (
+                <text
+                    key={index}
+                    x={isSmallScreen ? (window.innerWidth / 2) - (line.length * fontSize * 0.3 / 2) : 0}
+                    y={isSmallScreen ? (window.innerHeight / 2) - ((displayText.length * fontSize) / 2) + index * fontSize : index * fontSize}
+                    fill="#FFFFFF"
+                    style={{
+                        fontSize: `${fontSize}px`,
+                        fontFamily: 'monospace',
+                        dominantBaseline: 'hanging',
+                        whiteSpace: 'pre',
+                    }}
+                >
+                    {line}
+                </text>
+            ))}
             {showCenterText && (
                 <foreignObject x="10%" y="5%" width="80%" height="90%">
                     <div
@@ -415,7 +313,27 @@ ACM-VIT has been working on projects related to graphic designing, web developme
                     </div>
                 </foreignObject>
             )}
-            {/* ... (keep the existing scroll bar SVG content) */}
+            {showCenterText && (
+                <g>
+                    <rect
+                        x="90%"
+                        y="5%"
+                        width="0.5%"
+                        height="90%"
+                        fill="#000000"
+                        opacity="0.3"
+                    />
+                    <rect
+                        x="90%"
+                        y={`${5 + scrollPosition * 90}%`}
+                        width="0.5%"
+                        height="5%"
+                        fill="#000000"
+                        rx="1"
+                        ry="1"
+                    />
+                </g>
+            )}
         </svg>
     );
 };
