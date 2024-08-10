@@ -269,11 +269,11 @@ const Landing = () => {
                                                     _hover={{ bg: 'black', color: 'white' }}
                                                     onClick={() => {
                                                         if (os === 'macOS') {
-                                                            window.location.href = 'https://github.com/JuxtaRYCT/rust-stopwatch/releases/download/release/cli-rpg-linux.zip';
+                                                            window.location.href = 'https://github.com/JuxtaRYCT/rust-stopwatch/releases/download/release/cli-rpg-mac.zip';
                                                         } else if (os === 'Windows') {
                                                             window.location.href = 'https://github.com/JuxtaRYCT/rust-stopwatch/releases/download/release/cli-rpg-windows.zip';
                                                         } else if (os === 'Linux') {
-                                                            window.location.href = 'https://github.com/ACM-VIT/cli-rpg/releases/download/publish/cli-rpg-linux.zip';
+                                                            window.location.href = 'https://github.com/JuxtaRYCT/rust-stopwatch/releases/download/release/cli-rpg-linux.zip';
                                                         }
                                                     }}
                                                 >
